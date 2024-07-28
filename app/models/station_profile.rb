@@ -1,0 +1,2 @@
+class StationProfile < ApplicationRecord
+end
