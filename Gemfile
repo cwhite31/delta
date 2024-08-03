@@ -46,7 +46,10 @@ gem "bootsnap", require: false
 # app specific
 gem "awesome_print", require: "ap"
 gem 'devise', '~> 4.9.2'
+gem 'filterrific', "5.2.3"
+gem "groupdate"
 gem "name_of_person"
+gem "will_paginate",  '~> 3.3.1'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

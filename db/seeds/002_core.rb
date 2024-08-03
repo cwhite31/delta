@@ -1,4 +1,5 @@
 require "awesome_print"
+ap "Adding contacts ..."
 Contact.destroy_all
 ActiveRecord::Base.connection.reset_pk_sequence!("contacts")
 
@@ -20,9 +21,7 @@ File.foreach("db/seeds/sample.adi") do |line|
   records.each do |record|
     contact = Contact.new
 contact.callsign = record.to_h["Call:"]
-puts record.to_h["Call:"]
-puts record.to_h["Freq:"]
-puts '---------------------'
+puts record.to_h["."]
 contact.qso_date = record.to_h["QSO_Date:"]
 if record.to_h["Time_On:"]
   contact.time_on = record.to_h["Time_On:"]

@@ -1,5 +1,5 @@
 # Users
-ap "Creating developer user ..."
+ap "Adding developer user ..."
 User.destroy_all
 ActiveRecord::Base.connection.reset_pk_sequence!("users")
 User.create!(

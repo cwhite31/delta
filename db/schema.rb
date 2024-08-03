@@ -10,9 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_07_28_085414) do
+ActiveRecord::Schema[7.2].define(version: 2024_08_01_110512) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bands", force: :cascade do |t|
+    t.string "key"
+    t.string "name"
+    t.string "range"
+    t.decimal "frequency_start_mhz", precision: 8, scale: 4
+    t.decimal "frequency_end_mhz", precision: 8, scale: 4
+    t.boolean "is_active", default: true
+    t.integer "order"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "configs", force: :cascade do |t|
     t.string "lotw_download_url"
@@ -79,6 +91,22 @@ ActiveRecord::Schema[7.2].define(version: 2024_07_28_085414) do
     t.datetime "updated_at", null: false
     t.index ["callsign"], name: "index_contacts_on_callsign"
     t.index ["qso_date"], name: "index_contacts_on_qso_date"
+  end
+
+  create_table "countries", force: :cascade do |t|
+    t.string "prefix"
+    t.string "name"
+    t.integer "dxcc_id"
+    t.string "continent_code"
+    t.integer "cq_zone"
+    t.integer "itu_zone"
+    t.decimal "lat", precision: 6, scale: 2
+    t.decimal "long", precision: 6, scale: 2
+    t.decimal "utc_offset", precision: 6, scale: 2
+    t.text "alias"
+    t.index ["dxcc_id"], name: "index_countries_on_dxcc_id"
+    t.index ["name"], name: "index_countries_on_name"
+    t.index ["prefix"], name: "index_countries_on_prefix"
   end
 
   create_table "notes", force: :cascade do |t|
