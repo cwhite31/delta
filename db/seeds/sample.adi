@@ -57181,6 +57181,8 @@
 <Band:3>20M
 <N3FJP_COMPUTERNAME:15>DESKTOP-OOMLI1F
 <Cont:2>EU
+<Country:15>European Russia
+<DXCC:2>54
 <CQz:2>16
 <Freq:7>14.0752
 <My_Gridsquare:4>QF84
@@ -62817,6 +62819,8 @@
 <Band:3>12M
 <N3FJP_COMPUTERNAME:15>DESKTOP-OOMLI1F
 <Cont:2>AS
+<Country:3>Japan
+<DXCC:3>339
 <CQz:2>25
 <Freq:9>24.916198
 <My_Gridsquare:4>QF84
@@ -66501,7 +66505,8 @@
 <Time_Off:6>054345
 <Band:3>10M
 <N3FJP_COMPUTERNAME:15>DESKTOP-OOMLI1F
-<Cont:2>EU
+Country:15>European Russia
+<DXCC:2>54
 <CQz:2>16
 <Freq:9>28.075198
 <My_Gridsquare:4>QF84
@@ -73269,7 +73274,8 @@
 <Time_Off:6>004215
 <Band:3>12M
 <N3FJP_COMPUTERNAME:15>DESKTOP-OOMLI1F
-<Cont:2>AS
+<Country:5>Japan
+<DXCC:3>339
 <CQz:2>25
 <Freq:9>24.916447
 <My_Gridsquare:4>QF84
@@ -81609,6 +81615,7 @@
 <Band:3>15M
 <N3FJP_COMPUTERNAME:5>VK6KA
 <Freq:8>21.07565
+<DXCC:3>0
 <My_Gridsquare:6>OF84xv
 <MY_State:2>WA
 <N3FJP_Initials:2>CW
@@ -111695,6 +111702,8 @@
 <Band:3>10M
 <N3FJP_COMPUTERNAME:5>VK6KA
 <Cont:2>EU
+<Country:15>Austria
+<DXCC:3>206
 <CQz:2>15
 <Freq:8>28.07559
 <My_Gridsquare:6>OF84xv

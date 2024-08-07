@@ -1,5 +1,6 @@
 class CreateContacts < ActiveRecord::Migration[7.2]
   def change
+    enable_extension "tablefunc"
     create_table :contacts do |t|
       # station attributes
       t.string :callsign
@@ -50,10 +51,10 @@ class CreateContacts < ActiveRecord::Migration[7.2]
 
       # QSL
       t.string :qsl_confirmed_by
-      t.boolean :qsl_received
-      t.boolean :qsl_sent
-      t.boolean :lotw_qsl_sent
-      t.boolean :lotw_qsl_received
+      t.boolean :qsl_received, default: false
+      t.boolean :qsl_sent, default: false
+      t.boolean :lotw_qsl_sent, default: false
+      t.boolean :lotw_qsl_received, default: false
 
       t.timestamps
     end

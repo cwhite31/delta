@@ -53,13 +53,32 @@ contact.operator_name = record.to_h["Operator:"]
 contact.prefix = record.to_h["Prefix:"]
 contact.signal_report_received = record.to_h["RST_Rcvd:"]
 contact.signal_report_sent = record.to_h["RST_Sent:"]
-contact.qsl_received = record.to_h["QSL_Rcvd:"]
+if record.to_h["QSL_Rcvd:"] == "Y"
+  contact.qsl_received = record.to_h["QSL_Rcvd:"] = true
+end
 contact.lotw_qsl_received = record.to_h["QSL_Rcvd:"]
-contact.qsl_sent = record.to_h["QSL_Sent:"]
+if record.to_h["QSL_Sent:"] == "Y"
+  contact.qsl_sent = record.to_h["QSL_Sent:"] = true
+end
 contact.lotw_qsl_sent = record.to_h["QSL_Sent:"]
 contact.qsl_confirmed_by = record.to_h["N3FJP_QSLSCB:"]
 contact.comments = record.to_h["Comment:"]
 contact.power = record.to_h["TX_PWR:"]
 
 contact.save!
+
+ap contact.dxcc_id
+ap contact.band
+
+
+
+if contact.dxcc_id && contact.dxcc_id != 0
+  @country = Country.where( dxcc_id: contact.dxcc_id ).first
+  @country[contact.band.downcase] = true
+  @country.worked = true
+  if contact.qsl_received
+    @country.confirmed = true
+  end
+  @country.save!
+end
   end

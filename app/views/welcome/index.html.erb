@@ -93,7 +93,7 @@
                 </div>
               </div>
               <h1 class="mt-1 mb-3">
-                <%= Contact.distinct.count(:dxcc_id) %>
+                <%= Country.where(worked: true).count %>
               </h1>
               <div class="mb-0">
                 <span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i>
@@ -112,7 +112,8 @@
     <div class="card flex-fill w-100">
       <div class="card-header">
 
-        <h5 class="card-title mb-0">Monthly Contacts | <%= Time.now.year %> </h5>
+        <h5 class="card-title mb-0">Monthly Contacts | <%= Time.now.year %>
+        </h5>
       </div>
       <div class="card-body py-3">
         <div class="chart chart-sm">
@@ -123,82 +124,56 @@
   </div>
 </div>
 
-
-
 <div class="row">
   <div class="col-12 col-lg-8 col-xxl-9 d-flex">
     <div class="card flex-fill">
       <div class="card-header">
 
-        <h5 class="card-title mb-0">Latest Projects</h5>
+        <h5 class="card-title mb-0">DXCC</h5>
       </div>
       <table class="table table-hover my-0">
         <thead>
           <tr>
-            <th>Name</th>
-            <th class="d-none d-xl-table-cell">Start Date</th>
-            <th class="d-none d-xl-table-cell">End Date</th>
-            <th>Status</th>
-            <th class="d-none d-md-table-cell">Assignee</th>
+            <th class="d-none d-xl-table-cell">Country</th>
+            <th class="d-none d-xl-table-cell">40m</th>
+            <th class="d-none d-xl-table-cell">20m</th>
+            <th class="d-none d-xl-table-cell">15m</th>
+            <th class="d-none d-xl-table-cell">12m</th>
+            <th class="d-none d-xl-table-cell">1git0m</th>
+            <th class="d-none d-xl-table-cell">6m</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Project Apollo</td>
-            <td class="d-none d-xl-table-cell">01/01/2021</td>
-            <td class="d-none d-xl-table-cell">31/06/2021</td>
-            <td><span class="badge bg-success">Done</span></td>
-            <td class="d-none d-md-table-cell">Vanessa Tucker</td>
-          </tr>
-          <tr>
-            <td>Project Fireball</td>
-            <td class="d-none d-xl-table-cell">01/01/2021</td>
-            <td class="d-none d-xl-table-cell">31/06/2021</td>
-            <td><span class="badge bg-danger">Cancelled</span></td>
-            <td class="d-none d-md-table-cell">William Harris</td>
-          </tr>
-          <tr>
-            <td>Project Hades</td>
-            <td class="d-none d-xl-table-cell">01/01/2021</td>
-            <td class="d-none d-xl-table-cell">31/06/2021</td>
-            <td><span class="badge bg-success">Done</span></td>
-            <td class="d-none d-md-table-cell">Sharon Lessman</td>
-          </tr>
-          <tr>
-            <td>Project Nitro</td>
-            <td class="d-none d-xl-table-cell">01/01/2021</td>
-            <td class="d-none d-xl-table-cell">31/06/2021</td>
-            <td><span class="badge bg-warning">In progress</span></td>
-            <td class="d-none d-md-table-cell">Vanessa Tucker</td>
-          </tr>
-          <tr>
-            <td>Project Phoenix</td>
-            <td class="d-none d-xl-table-cell">01/01/2021</td>
-            <td class="d-none d-xl-table-cell">31/06/2021</td>
-            <td><span class="badge bg-success">Done</span></td>
-            <td class="d-none d-md-table-cell">William Harris</td>
-          </tr>
-          <tr>
-            <td>Project X</td>
-            <td class="d-none d-xl-table-cell">01/01/2021</td>
-            <td class="d-none d-xl-table-cell">31/06/2021</td>
-            <td><span class="badge bg-success">Done</span></td>
-            <td class="d-none d-md-table-cell">Sharon Lessman</td>
-          </tr>
-          <tr>
-            <td>Project Romeo</td>
-            <td class="d-none d-xl-table-cell">01/01/2021</td>
-            <td class="d-none d-xl-table-cell">31/06/2021</td>
-            <td><span class="badge bg-success">Done</span></td>
-            <td class="d-none d-md-table-cell">Christina Mason</td>
-          </tr>
-          <tr>
-            <td>Project Wombat</td>
-            <td class="d-none d-xl-table-cell">01/01/2021</td>
-            <td class="d-none d-xl-table-cell">31/06/2021</td>
-            <td><span class="badge bg-warning">In progress</span></td>
-            <td class="d-none d-md-table-cell">William Harris</td>
-          </tr>
+          <% @slots.each do |slot| %>
+            <% @cty=Country.where('name=?', slot['country']).first %>
+              <% if @cty %>
+                <tr>
+                  <th class="d-none d-xl-table-cell">
+                    <%= link_to slot['country'], controller: 'countries' , action: 'show' , id: @cty.id %>
+                  </th>
+                  <th class="d-none d-xl-table-cell">
+                    <%= slot['40m'] %>
+                  </th>
+                  <th class="d-none d-xl-table-cell">
+                    <%= slot['20m'] %>
+                  </th>
+                  <th class="d-none d-xl-table-cell">
+                    <%= slot['15m'] %>
+                  </th>
+                  <th class="d-none d-xl-table-cell">
+                    <%= slot['12m'] %>
+                  </th>
+
+                  <th class="d-none d-xl-table-cell">
+                    <%= slot['10m'] %>
+                  </th>
+                  <th class="d-none d-xl-table-cell">
+                    <%= slot['6m'] %>
+                  </th>
+
+                </tr>
+                <% end %>
+                  <% end %>
         </tbody>
       </table>
     </div>
@@ -206,14 +181,15 @@
   <div class="col-12 col-lg-4 col-xxl-3 d-flex">
     <div class="card flex-fill w-100">
       <div class="card-header">
-
         <h5 class="card-title mb-0">Annual Contacts</h5>
       </div>
-      <div class="card-body d-flex w-100">
-        <div class="align-self-center chart chart-lg">
-          <canvas id="chartjs-annual-contacts"></canvas>
+      <row>
+        <div class="card-body d-flex w-100">
+          <div class="align-self-center chart chart-lg">
+            <canvas id="chartjs-annual-contacts"></canvas>
+          </div>
         </div>
-      </div>
+      </row>
     </div>
   </div>
 </div>
@@ -287,41 +263,41 @@
       type: "bar",
       data: {
         labels: <%= @annual.keys.to_json.html_safe %>,
-        datasets: [{
-          label: "This year",
-          backgroundColor: window.theme.primary,
-          borderColor: window.theme.primary,
-          hoverBackgroundColor: window.theme.primary,
-          hoverBorderColor: window.theme.primary,
-          data: <%= @annual.values.to_json.html_safe %>,
-          barPercentage: .75,
-          categoryPercentage: .5
+      datasets: [{
+        label: "This year",
+        backgroundColor: window.theme.primary,
+        borderColor: window.theme.primary,
+        hoverBackgroundColor: window.theme.primary,
+        hoverBorderColor: window.theme.primary,
+        data: <%= @annual.values.to_json.html_safe %>,
+      barPercentage: .75,
+      categoryPercentage: .5
         }]
       },
-      options: {
-        maintainAspectRatio: false,
-        legend: {
+    options: {
+    maintainAspectRatio: false,
+    legend: {
+      display: false
+    },
+    scales: {
+      yAxes: [{
+        gridLines: {
           display: false
         },
-        scales: {
-          yAxes: [{
-            gridLines: {
-              display: false
-            },
-            stacked: false,
-            ticks: {
-              stepSize: 100,
-              max: 1000
-            }
-          }],
-          xAxes: [{
-            stacked: false,
-            gridLines: {
-              color: "transparent"
-            }
-          }]
+        stacked: false,
+        ticks: {
+          stepSize: 100,
+          max: 1000
         }
-      }
+      }],
+      xAxes: [{
+        stacked: false,
+        gridLines: {
+          color: "transparent"
+        }
+      }]
+    }
+  }
     });
   });
 </script>

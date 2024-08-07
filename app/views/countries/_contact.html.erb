@@ -1,0 +1,29 @@
+<div id="<%= dom_id contact %>">
+    <tr>
+        <td>
+            <%= contact.qso_date %>
+        </td>
+        <td>
+            <%= contact.time_on[0..1] %>:<%= contact.time_on[2..3] %> - <%= contact.time_off[0..1] %>:<%=
+                            contact.time_off[2..3] %>
+        </td>
+        <td class="d-none d-xl-table-cell">
+            <%= link_to contact.callsign, contact_path(contact) %>
+        </td>
+        <td class="d-none d-xl-table-cell">
+            <%= contact.band %>
+        </td>
+        <td><span class="badge bg-success">
+                <%= contact.mode %>
+            </span></td>
+        <td class="d-none d-xl-table-cell">
+            <%=contact.signal_report_sent %>
+        </td>
+        <td class="d-none d-xl-table-cell">
+            <%=contact.signal_report_received %>
+        </td>
+        <td class="d-none d-md-table-cell">
+            <%= contact.qsl_received %>
+        </td>
+    </tr>
+</div>

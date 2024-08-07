@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  resources :contacts
+  
   # Defines the root path route ("/")
   root "welcome#index"
+  resources :contacts
+  resources :countries
+
 end

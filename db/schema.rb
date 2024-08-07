@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_08_01_110512) do
+ActiveRecord::Schema[7.2].define(version: 2024_08_24_132843) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "tablefunc"
 
   create_table "bands", force: :cascade do |t|
     t.string "key"
@@ -83,10 +84,10 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_01_110512) do
     t.string "computer"
     t.string "station_gridsquare"
     t.string "qsl_confirmed_by"
-    t.boolean "qsl_received"
-    t.boolean "qsl_sent"
-    t.boolean "lotw_qsl_sent"
-    t.boolean "lotw_qsl_received"
+    t.boolean "qsl_received", default: false
+    t.boolean "qsl_sent", default: false
+    t.boolean "lotw_qsl_sent", default: false
+    t.boolean "lotw_qsl_received", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["callsign"], name: "index_contacts_on_callsign"
@@ -103,6 +104,25 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_01_110512) do
     t.decimal "lat", precision: 6, scale: 2
     t.decimal "long", precision: 6, scale: 2
     t.decimal "utc_offset", precision: 6, scale: 2
+    t.boolean "worked", default: false
+    t.boolean "confirmed", default: false
+    t.boolean "2200m", default: false
+    t.boolean "630m", default: false
+    t.boolean "160m", default: false
+    t.boolean "80m", default: false
+    t.boolean "60m", default: false
+    t.boolean "40m", default: false
+    t.boolean "30m", default: false
+    t.boolean "20m", default: false
+    t.boolean "17m", default: false
+    t.boolean "15m", default: false
+    t.boolean "12m", default: false
+    t.boolean "10m", default: false
+    t.boolean "8m", default: false
+    t.boolean "6m", default: false
+    t.boolean "4m", default: false
+    t.boolean "2m", default: false
+    t.boolean "70cm", default: false
     t.text "alias"
     t.index ["dxcc_id"], name: "index_countries_on_dxcc_id"
     t.index ["name"], name: "index_countries_on_name"

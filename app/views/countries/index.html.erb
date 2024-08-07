@@ -1,0 +1,161 @@
+<row% content_for :title, "Contacts" %>
+
+  <div class="row">
+    <div class="col-12 col-lg-8 col-xxl-9 d-flex">
+      <div class="card flex-fill">
+        <div class="card-header">
+
+          <h5 class="card-title mb-0">DXCC</h5>
+        </div>
+        <table class="table table-hover my-0">
+          <thead>
+            <tr>
+              <th colspan="2">Entity</th>
+              <th class="d-none d-xl-table-cell">80m</th>
+              <th class="d-none d-xl-table-cell">40m</th>
+              <th class="d-none d-xl-table-cell">30m</th>
+              <th class="d-none d-xl-table-cell">20m</th>
+              <th class="d-none d-xl-table-cell">17m</th>
+              <th class="d-none d-xl-table-cell">15m</th>
+              <th class="d-none d-xl-table-cell">12m</th>
+              <th class="d-none d-xl-table-cell">10m</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @countries.each do |country| %>
+              <%= render country %>
+                <% end %>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+    <div class="col-12 col-lg-4 col-xxl-3 d-flex">
+      <row>
+        <div class="card flex-fill w-100">
+          <div class="card-header">
+            <h5 class="card-title mb-0">DXCC Summary</h5>
+          </div>
+          <div class="card-body d-flex w-100">
+            <table class="table table-hover my-0">
+              <tbody>
+                <tr>
+                  <td>Worked</td>
+                  <td>
+                    <%= Country.where('worked=true').count %>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Confirmed</td>
+                  <td>
+                    <%= Country.where('confirmed=true').count %>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+      </row>
+      <row>
+        <div class="card-body d-flex w-100">
+          <table class="table table-hover my-0">
+            <thead>
+              <tr>
+                <td colspan="*">
+                  Bands
+                </td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>80m</td>
+                <td>
+                  <%= Country.where('"80m"=true').count %>
+                </td>
+                <td>
+                  <%= Country.where('"80m"=true and confirmed=true').count %>
+                </td>
+              </tr>
+              <tr>
+                <td>40m</td>
+                <td>
+                  <%= Country.where('"40m"=true').count %>
+                </td>
+                <td>
+                  <%= Country.where('"40m"=true and confirmed=true').count %>
+                </td>
+              </tr>
+              <tr>
+                <td>30m</td>
+                <td>
+                  <%= Country.where('"30m"=true').count %>
+                </td>
+                <td>
+                  <%= Country.where('"30m"=true and confirmed=true').count %>
+                </td>
+              </tr>
+              <tr>
+                <td>20m</td>
+                <td>
+                  <%= Country.where('"20m"=true').count %>
+                </td>
+                <td>
+                  <%= Country.where('"20m"=true and confirmed=true').count %>
+                </td>
+              </tr>
+              <tr>
+                <td>17m</td>
+                <td>
+                  <%= Country.where('"17m"=true').count %>
+                </td>
+                <td>
+                  <%= Country.where('"17m"=true and confirmed=true').count %>
+                </td>
+              </tr>
+              <tr>
+                <td>15m</td>
+                <td>
+                  <%= Country.where('"15m"=true').count %>
+                </td>
+                <td>
+                  <%= Country.where('"15m"=true and confirmed=true').count %>
+                </td>
+              </tr>
+              <tr>
+                <td>12m</td>
+                <td>
+                  <%= Country.where('"12m"=true').count %>
+                </td>
+                <td>
+                  <%= Country.where('"12m"=true and confirmed=true').count %>
+                </td>
+              </tr>
+              <tr>
+                <td>10m</td>
+                <td>
+                  <%= Country.where('"10m"=true').count %>
+                </td>
+                <td>
+                  <%= Country.where('"10m"=true and confirmed=true').count %>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-body d-flex w-100">
+          Countries<br />
+          Total: <%= Contact.count('DISTINCT dxcc_id') %><br />
+            Year: <%= Contact.where('EXTRACT(YEAR FROM qso_date)=?', Date.current.year).count('DISTINCT dxcc_id') %>
+              <br />
+              Month: <%= Contact.where('EXTRACT(MONTH FROM qso_date)=?', Date.current.month).count('DISTINCT dxcc_id')
+                %><br />
+        </div>
+        <div class="card-body d-flex w-100">
+          Zones<br />
+          CQ: <%= Contact.count('DISTINCT cq_zone') %><br />
+            ITU: <%= Contact.count('DISTINCT itu_zone') %><br />
+        </div>
+    </div>
+  </div>
+  </row>
+  </div>
+  <%= link_to "New contact" , new_contact_path %>
