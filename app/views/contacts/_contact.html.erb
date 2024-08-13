@@ -1,11 +1,10 @@
 <div id="<%= dom_id contact %>">
     <tr>
         <td>
-            <%= contact.qso_date %>
+            <%= contact.qso_date.strftime("%d" " %b" " %y" ) %>
         </td>
         <td>
-            <%= contact.time_on[0..1] %>:<%= contact.time_on[2..3] %> - <%= contact.time_off[0..1] %>:<%=
-                            contact.time_off[2..3] %>
+            <%= contact.time_on[0..1] %>:<%= contact.time_on[2..3] %>
         </td>
         <td class="d-none d-xl-table-cell">
             <%= link_to contact.callsign, contact_path(contact) %>

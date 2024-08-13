@@ -4,8 +4,7 @@
             <%= contact.qso_date %>
         </td>
         <td>
-            <%= contact.time_on[0..1] %>:<%= contact.time_on[2..3] %> - <%= contact.time_off[0..1] %>:<%=
-                            contact.time_off[2..3] %>
+            <%= contact.time_on[0..1] %>:<%= contact.time_on[2..3] %> 
         </td>
         <td class="d-none d-xl-table-cell">
             <%= link_to contact.callsign, contact_path(contact) %>
