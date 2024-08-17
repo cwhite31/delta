@@ -22,7 +22,11 @@
             <%=contact.signal_report_received %>
         </td>
         <td class="d-none d-md-table-cell">
-            <%= contact.qsl_received %>
+            <% if contact.qsl_received %>
+                <i data-feather="check" class="text-success"></i>
+                <% else %>
+                    <i data-feather="x-circle" class="text-secondary"></i>
+                    <% end %>
         </td>
     </tr>
 </div>

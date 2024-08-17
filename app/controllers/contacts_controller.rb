@@ -4,7 +4,8 @@ class ContactsController < ApplicationController
   # GET /contacts or /contacts.json
   def index
     # Initialize filterrific
-@contacts = Contact.order(qso_date: :desc).first(10)
+    @contacts = Contact.paginate(page: params[:page]).order(qso_date: :desc)
+# @contacts = Contact.order(qso_date: :desc).first(10)
   end
 
   # GET /contacts/1 or /contacts/1.json

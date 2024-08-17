@@ -28,7 +28,9 @@
             <% @contacts.each do |contact| %>
               <%= render contact %>
                 <% end %>
+               
           </tbody>
+          <%= will_paginate @posts %>
         </table>
       </div>
       
