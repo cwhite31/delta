@@ -137,10 +137,21 @@
             <th class="d-none d-xl-table-cell">Country</th>
             <th class="d-none d-xl-table-cell">40m</th>
             <th class="d-none d-xl-table-cell">20m</th>
+            <th class="d-none d-xl-table-cell">17m</th>
             <th class="d-none d-xl-table-cell">15m</th>
             <th class="d-none d-xl-table-cell">12m</th>
             <th class="d-none d-xl-table-cell">10m</th>
             <th class="d-none d-xl-table-cell">6m</th>
+          </tr>
+          <tr>
+            <th class="d-none d-xl-table-cell">&nbsp;</th>
+            <th class="d-none d-xl-table-cell"><%= Contact.select(:country).distinct.where(band: '40M').count %></th>
+            <th class="d-none d-xl-table-cell"><%= Contact.select(:country).distinct.where(band: '20M').count %></th>
+            <th class="d-none d-xl-table-cell"><%= Contact.select(:country).distinct.where(band: '17M').count %></th>
+            <th class="d-none d-xl-table-cell"><%= Contact.select(:country).distinct.where(band: '15M').count %></th>
+            <th class="d-none d-xl-table-cell"><%= Contact.select(:country).distinct.where(band: '12M').count %></th>
+            <th class="d-none d-xl-table-cell"><%= Contact.select(:country).distinct.where(band: '10M').count %></th>
+            <th class="d-none d-xl-table-cell"><%= Contact.select(:country).distinct.where(band: '6M').count %></th>
           </tr>
         </thead>
         <tbody>
@@ -156,6 +167,9 @@
                   </th>
                   <th class="d-none d-xl-table-cell">
                     <%= slot['20m'] %>
+                  </th>
+                  <th class="d-none d-xl-table-cell">
+                    <%= slot['17m'] %>
                   </th>
                   <th class="d-none d-xl-table-cell">
                     <%= slot['15m'] %>
