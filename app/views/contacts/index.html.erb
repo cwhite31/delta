@@ -28,36 +28,52 @@
             <% @contacts.each do |contact| %>
               <%= render contact %>
                 <% end %>
-               
+
           </tbody>
           <%= will_paginate @posts %>
         </table>
       </div>
-      
+
     </div>
     <div class="col-12 col-lg-4 col-xxl-3 d-flex">
       <div class="card flex-fill w-100">
         <div class="card-header">
-          <h5 class="card-title mb-0">QSO Summary</h5>
+          <h5 class="card-title mb-0">Summary</h5>
         </div>
-        <div class="card-body d-flex w-100">
-          Contacts<br />
-          Total: <%= Contact.count %><br />
-          Year: <%= Contact.where('EXTRACT(YEAR FROM qso_date) = ?', Date.current.year).count %><br />
-          Month: <%= Contact.where('EXTRACT(MONTH FROM qso_date) = ?', Date.current.month).count %><br />
+        <div class="card">
+          <div class="card-body">
+            <h5>Contacts</h5>
+            Total: <%= Contact.count %><br />
+              Year: <%= Contact.where('EXTRACT(YEAR FROM qso_date)=?', Date.current.year).count %><br />
+                Month: <%= Contact.where('EXTRACT(MONTH FROM qso_date)=?', Date.current.month).count %><br />
+          </div>
         </div>
-        <div class="card-body d-flex w-100">
-          Countries<br />
-          Total: <%= Contact.count('DISTINCT dxcc_id') %><br />
-          Year: <%= Contact.where('EXTRACT(YEAR FROM qso_date) = ?', Date.current.year).count('DISTINCT dxcc_id') %><br />
-          Month: <%= Contact.where('EXTRACT(MONTH FROM qso_date) = ?', Date.current.month).count('DISTINCT dxcc_id') %><br />
+        <div class="card">
+          <div class="card-body">
+            <h5>Countries</h5>
+            Total: <%= Contact.count('DISTINCT dxcc_id') %><br />
+              Year: <%= Contact.where('EXTRACT(YEAR FROM qso_date)=?', Date.current.year).count('DISTINCT dxcc_id') %>
+                <br />
+                Month: <%= Contact.where('EXTRACT(MONTH FROM qso_date)=?', Date.current.month).count('DISTINCT dxcc_id')
+                  %><br />
+          </div>
         </div>
-        <div class="card-body d-flex w-100">
-          Zones<br />
-          CQ: <%= Contact.count('DISTINCT cq_zone') %><br />
-          ITU: <%= Contact.count('DISTINCT itu_zone') %><br />
+        <div class="card">
+          <div class="card-body">
+            <h5>Zones</h5>
+            CQ: <%= Contact.count('DISTINCT cq_zone') %><br />
+              ITU: <%= Contact.count('DISTINCT itu_zone') %><br />
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <h5>Upload</h5>
+            <%= form_with url: load_contacts_path , multipart: true do |f| %>
+              <%= file_field_tag :adi_file %>
+                <%= f.button "Load" , type: "submit" , :class=> "btn btn-primary" %>
+                  <% end %>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <%= link_to "New contact" , new_contact_path %>
+    <%= link_to "New contact" , new_contact_path %>
