@@ -1,12 +1,12 @@
-# production:
-#   adapter: postgresql
-#   encoding: unicode
-#   database: delta
-#   username: deploy
-#   password: ax6kai
-#   # host: 127.0.0.1
-#   min_messages: WARNING
-#   pool: 5
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: delta
+  username: deploy
+  password: ax6kai
+  # host: 127.0.0.1
+  min_messages: WARNING
+  pool: 5
 # development:
 #   adapter: postgresql
 #   encoding: unicode
