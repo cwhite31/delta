@@ -70,3 +70,5 @@ yarn-debug.log*
 .DS_Store
 .idea/
 /config/master.key
+
+/config/credentials/production.key
