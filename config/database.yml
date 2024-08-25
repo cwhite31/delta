@@ -1,18 +1,18 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: alpha_development
-  username: postgres
-  password: vk6kai
+  database: delta
+  username: deploy
+  password: ax6kai
   host: localhost
   min_messages: WARNING
   pool: 5
 test:
   adapter: postgresql
   encoding: unicode
-  database: alpha_test
-  username: postgres
-  password: vk6kai
+  database: delta
+  username: deploy
+  password: ax6kai
   host: localhost
   min_messages: WARNING
   pool: 5
