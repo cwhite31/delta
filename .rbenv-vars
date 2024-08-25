@@ -1,3 +1,0 @@
-DATABASE_URL=postgresql://user_name:PASSWORD@127.0.0.1/app_name
-
-RAILS_MASTER_KEY=a8e798ae82554a09ee5dd58ec3f45753
