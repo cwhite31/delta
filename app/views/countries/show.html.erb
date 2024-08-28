@@ -22,8 +22,27 @@
               <li class="mb-1"><span data-feather="grid" class="feather-sm me-1"></span>
                 <%= @country.itu_zone %>
               </li>
-
             </ul>
+          </div>
+        </div>
+      </div>
+      <div class="card mb-3">
+        <div class="card-header">
+          <h5 class="card-title mb-0">Bands</h5>
+        </div>
+        <div class="card-body text-left">
+          <div class="card-body">
+            <table>
+              <tbody>
+                <% @bands.keys.sort.each do |key, value| %>
+                <tr>
+                  <td>
+                    <%=h "#{key.to_s} #{@bands[key]}" %>
+                  </td>
+                </tr>
+                <% end %>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>

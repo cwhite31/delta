@@ -22,7 +22,7 @@
                 <%= @last.callsign %>
               </h1>
               <div class="mb-0">
-                <span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i>
+                <span class="text-primary"> <i class="mdi mdi-arrow-bottom-right"></i>
                   <%= @last.qso_date.strftime("%d %B %y") %> | <%= @last.band %>
                 </span>
                 <span class="text-muted"></span>
@@ -46,7 +46,7 @@
                 <%= Contact.distinct.count(:callsign) %>
               </h1>
               <div class="mb-0">
-                <span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i>
+                <span class="text-primary"> <i class="mdi mdi-arrow-bottom-right"></i>
                   <%= Contact.this_year.distinct.count(:callsign) %>
                 </span>
                 <span class="text-muted">This year</span>
@@ -72,7 +72,7 @@
                 <%= Contact.count %>
               </h1>
               <div class="mb-0">
-                <span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i>
+                <span class="text-primary"> <i class="mdi mdi-arrow-bottom-right"></i>
                   <%= Contact.this_year.count %>
                 </span>
                 <span class="text-muted">This year</span>
@@ -96,7 +96,7 @@
                 <%= Country.where(worked: true).count %>
               </h1>
               <div class="mb-0">
-                <span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i>
+                <span class="text-primary"> <i class="mdi mdi-arrow-bottom-right"></i>
                   <%= Contact.this_year.distinct.count(:dxcc_id) %>
                 </span>
                 <span class="text-muted">This year</span>
@@ -134,36 +134,44 @@
       <table class="table table-hover my-0">
         <thead>
           <tr>
-            <th class="d-none d-xl-table-cell">Country</th>
-            <th class="d-none d-xl-table-cell">40m</th>
-            <th class="d-none d-xl-table-cell">20m</th>
-            <th class="d-none d-xl-table-cell">17m</th>
-            <th class="d-none d-xl-table-cell">15m</th>
-            <th class="d-none d-xl-table-cell">12m</th>
-            <th class="d-none d-xl-table-cell">10m</th>
-            <th class="d-none d-xl-table-cell">6m</th>
+            <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">Country</th>
+            <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">80m</th>
+            <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">40m</th>
+            <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">30m</th>
+            <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">20m</th>
+            <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">17m</th>
+            <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">15m</th>
+            <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">12m</th>
+            <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">10m</th>
+            <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">6m</th>
           </tr>
           <tr>
             <th class="d-none d-xl-table-cell">&nbsp;</th>
-            <th class="d-none d-xl-table-cell">
+            <th class="d-none d-xl-table-cell bg-light bg-gradient">
+              <%= Contact.select(:country).distinct.where(band: '80M' ).count %>
+            </th>
+            <th class="d-none d-xl-table-cell bg-light bg-gradient">
               <%= Contact.select(:country).distinct.where(band: '40M' ).count %>
             </th>
-            <th class="d-none d-xl-table-cell">
+            <th class="d-none d-xl-table-cell bg-light bg-gradient">
+              <%= Contact.select(:country).distinct.where(band: '30M' ).count %>
+            </th>
+            <th class="d-none d-xl-table-cell bg-light bg-gradient">
               <%= Contact.select(:country).distinct.where(band: '20M' ).count %>
             </th>
-            <th class="d-none d-xl-table-cell">
+            <th class="d-none d-xl-table-cell bg-light bg-gradient ">
               <%= Contact.select(:country).distinct.where(band: '17M' ).count %>
             </th>
-            <th class="d-none d-xl-table-cell">
+            <th class="d-none d-xl-table-cell bg-light bg-gradient">
               <%= Contact.select(:country).distinct.where(band: '15M' ).count %>
             </th>
-            <th class="d-none d-xl-table-cell">
+            <th class="d-none d-xl-table-cell bg-light bg-gradient">
               <%= Contact.select(:country).distinct.where(band: '12M' ).count %>
             </th>
-            <th class="d-none d-xl-table-cell">
+            <th class="d-none d-xl-table-cell bg-light bg-gradient">
               <%= Contact.select(:country).distinct.where(band: '10M' ).count %>
             </th>
-            <th class="d-none d-xl-table-cell">
+            <th class="d-none d-xl-table-cell bg-light bg-gradient">
               <%= Contact.select(:country).distinct.where(band: '6M' ).count %>
             </th>
           </tr>
@@ -177,7 +185,13 @@
                     <%= link_to slot['country'], controller: 'countries' , action: 'show' , id: @cty.id %>
                   </th>
                   <th class="d-none d-xl-table-cell">
+                    <%= slot['80m'] %>
+                  </th>
+                  <th class="d-none d-xl-table-cell">
                     <%= slot['40m'] %>
+                  </th>
+                  <th class="d-none d-xl-table-cell">
+                    <%= slot['30m'] %>
                   </th>
                   <th class="d-none d-xl-table-cell">
                     <%= slot['20m'] %>

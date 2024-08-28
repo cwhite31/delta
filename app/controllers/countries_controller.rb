@@ -10,7 +10,7 @@ class CountriesController < ApplicationController
   def show
     # @country = Country.where('name = ?', params[:name]).first
     @contacts = Contact.where('country = ?', @country.name).order(qso_date: :desc)
-    
+    @bands = Contact.group(:band).where('country = ?', @country.name).count
   end
   
 
