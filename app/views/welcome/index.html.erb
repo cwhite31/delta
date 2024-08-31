@@ -1,345 +1,351 @@
 <h1 class="h3 mb-3"><strong>Analytics</strong> Dashboard</h1>
+<% if user_signed_in? %>
+  <div> Welcome <%= current_user.email %>
+  </div>
+  <%= button_to "Sign out" , destroy_user_session_path, method: :delete %>
+    <% else %>
+      <%= button_to "Sign in" , new_user_session_path %>
+        <% end %>
+          <div class="row">
+            <div class="col-xl-6 col-xxl-5 d-flex">
+              <div class="w-100">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="row">
+                          <div class="col mt-0">
+                            <h5 class="card-title">Last</h5>
+                          </div>
 
-<div class="row">
-  <div class="col-xl-6 col-xxl-5 d-flex">
-    <div class="w-100">
-      <div class="row">
-        <div class="col-sm-6">
-          <div class="card">
-            <div class="card-body">
-              <div class="row">
-                <div class="col mt-0">
-                  <h5 class="card-title">Last</h5>
-                </div>
+                          <div class="col-auto">
+                            <div class="stat text-primary">
+                              <i class="align-middle" data-feather="radio"></i>
+                            </div>
+                          </div>
+                        </div>
+                        <h1 class="mt-1 mb-3">
+                          <%= @last.callsign %>
+                        </h1>
+                        <div class="mb-0">
+                          <span class="text-primary"> <i class="mdi mdi-arrow-bottom-right"></i>
+                            <%= @last.qso_date.strftime("%d %B %y") %> | <%= @last.band %>
+                          </span>
+                          <span class="text-muted"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="row">
+                          <div class="col mt-0">
+                            <h5 class="card-title">Unique</h5>
+                          </div>
 
-                <div class="col-auto">
-                  <div class="stat text-primary">
-                    <i class="align-middle" data-feather="radio"></i>
+                          <div class="col-auto">
+                            <div class="stat text-primary">
+                              <i class="align-middle" data-feather="radio"></i>
+                            </div>
+                          </div>
+                        </div>
+                        <h1 class="mt-1 mb-3">
+                          <%= Contact.distinct.count(:callsign) %>
+                        </h1>
+                        <div class="mb-0">
+                          <span class="text-primary"> <i class="mdi mdi-arrow-bottom-right"></i>
+                            <%= Contact.this_year.distinct.count(:callsign) %>
+                          </span>
+                          <span class="text-muted">This year</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="row">
+                          <div class="col mt-0">
+                            <h5 class="card-title">Total</h5>
+                          </div>
+
+                          <div class="col-auto">
+                            <div class="stat text-primary">
+                              <i class="align-middle" data-feather="radio"></i>
+                            </div>
+                          </div>
+                        </div>
+                        <h1 class="mt-1 mb-3">
+                          <%= Contact.count %>
+                        </h1>
+                        <div class="mb-0">
+                          <span class="text-primary"> <i class="mdi mdi-arrow-bottom-right"></i>
+                            <%= Contact.this_year.count %>
+                          </span>
+                          <span class="text-muted">This year</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="row">
+                          <div class="col mt-0">
+                            <h5 class="card-title">DXCC</h5>
+                          </div>
+
+                          <div class="col-auto">
+                            <div class="stat text-primary">
+                              <i class="align-middle" data-feather="radio"></i>
+                            </div>
+                          </div>
+                        </div>
+                        <h1 class="mt-1 mb-3">
+                          <%= Country.where(worked: true).count %>
+                        </h1>
+                        <div class="mb-0">
+                          <span class="text-primary"> <i class="mdi mdi-arrow-bottom-right"></i>
+                            <%= Contact.this_year.distinct.count(:dxcc_id) %>
+                          </span>
+                          <span class="text-muted">This year</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-              <h1 class="mt-1 mb-3">
-                <%= @last.callsign %>
-              </h1>
-              <div class="mb-0">
-                <span class="text-primary"> <i class="mdi mdi-arrow-bottom-right"></i>
-                  <%= @last.qso_date.strftime("%d %B %y") %> | <%= @last.band %>
-                </span>
-                <span class="text-muted"></span>
-              </div>
             </div>
-          </div>
-          <div class="card">
-            <div class="card-body">
-              <div class="row">
-                <div class="col mt-0">
-                  <h5 class="card-title">Unique</h5>
-                </div>
 
-                <div class="col-auto">
-                  <div class="stat text-primary">
-                    <i class="align-middle" data-feather="radio"></i>
+            <div class="col-xl-6 col-xxl-7">
+              <div class="card flex-fill w-100">
+                <div class="card-header">
+
+                  <h5 class="card-title mb-0">Monthly Contacts | <%= Time.now.year %>
+                  </h5>
+                </div>
+                <div class="card-body py-3">
+                  <div class="chart chart-sm">
+                    <canvas id="chartjs-monthly-contacts"></canvas>
                   </div>
                 </div>
               </div>
-              <h1 class="mt-1 mb-3">
-                <%= Contact.distinct.count(:callsign) %>
-              </h1>
-              <div class="mb-0">
-                <span class="text-primary"> <i class="mdi mdi-arrow-bottom-right"></i>
-                  <%= Contact.this_year.distinct.count(:callsign) %>
-                </span>
-                <span class="text-muted">This year</span>
-              </div>
             </div>
           </div>
-        </div>
-        <div class="col-sm-6">
-          <div class="card">
-            <div class="card-body">
-              <div class="row">
-                <div class="col mt-0">
-                  <h5 class="card-title">Total</h5>
-                </div>
 
-                <div class="col-auto">
-                  <div class="stat text-primary">
-                    <i class="align-middle" data-feather="radio"></i>
+          <div class="row">
+            <div class="col-12 col-lg-8 col-xxl-9 d-flex">
+              <div class="card flex-fill">
+                <div class="card-header">
+
+                  <h5 class="card-title mb-0">DXCC</h5>
+                </div>
+                <table class="table table-hover my-0">
+                  <thead>
+                    <tr>
+                      <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">Country</th>
+                      <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">80m</th>
+                      <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">40m</th>
+                      <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">30m</th>
+                      <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">20m</th>
+                      <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">17m</th>
+                      <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">15m</th>
+                      <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">12m</th>
+                      <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">10m</th>
+                      <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">6m</th>
+                    </tr>
+                    <tr>
+                      <th class="d-none d-xl-table-cell">&nbsp;</th>
+                      <th class="d-none d-xl-table-cell bg-light bg-gradient">
+                        <%= Contact.select(:country).distinct.where(band: '80M' ).count %>
+                      </th>
+                      <th class="d-none d-xl-table-cell bg-light bg-gradient">
+                        <%= Contact.select(:country).distinct.where(band: '40M' ).count %>
+                      </th>
+                      <th class="d-none d-xl-table-cell bg-light bg-gradient">
+                        <%= Contact.select(:country).distinct.where(band: '30M' ).count %>
+                      </th>
+                      <th class="d-none d-xl-table-cell bg-light bg-gradient">
+                        <%= Contact.select(:country).distinct.where(band: '20M' ).count %>
+                      </th>
+                      <th class="d-none d-xl-table-cell bg-light bg-gradient ">
+                        <%= Contact.select(:country).distinct.where(band: '17M' ).count %>
+                      </th>
+                      <th class="d-none d-xl-table-cell bg-light bg-gradient">
+                        <%= Contact.select(:country).distinct.where(band: '15M' ).count %>
+                      </th>
+                      <th class="d-none d-xl-table-cell bg-light bg-gradient">
+                        <%= Contact.select(:country).distinct.where(band: '12M' ).count %>
+                      </th>
+                      <th class="d-none d-xl-table-cell bg-light bg-gradient">
+                        <%= Contact.select(:country).distinct.where(band: '10M' ).count %>
+                      </th>
+                      <th class="d-none d-xl-table-cell bg-light bg-gradient">
+                        <%= Contact.select(:country).distinct.where(band: '6M' ).count %>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% @slots.each do |slot| %>
+                      <% @cty=Country.where('name=?', slot['country']).first %>
+                        <% if @cty %>
+                          <tr>
+                            <th class="d-none d-xl-table-cell">
+                              <%= link_to slot['country'], controller: 'countries' , action: 'show' , id: @cty.id %>
+                            </th>
+                            <th class="d-none d-xl-table-cell">
+                              <%= slot['80m'] %>
+                            </th>
+                            <th class="d-none d-xl-table-cell">
+                              <%= slot['40m'] %>
+                            </th>
+                            <th class="d-none d-xl-table-cell">
+                              <%= slot['30m'] %>
+                            </th>
+                            <th class="d-none d-xl-table-cell">
+                              <%= slot['20m'] %>
+                            </th>
+                            <th class="d-none d-xl-table-cell">
+                              <%= slot['17m'] %>
+                            </th>
+                            <th class="d-none d-xl-table-cell">
+                              <%= slot['15m'] %>
+                            </th>
+                            <th class="d-none d-xl-table-cell">
+                              <%= slot['12m'] %>
+                            </th>
+
+                            <th class="d-none d-xl-table-cell">
+                              <%= slot['10m'] %>
+                            </th>
+                            <th class="d-none d-xl-table-cell">
+                              <%= slot['6m'] %>
+                            </th>
+
+                          </tr>
+                          <% end %>
+                            <% end %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="col-12 col-lg-4 col-xxl-3 d-flex">
+              <div class="card flex-fill w-100">
+                <div class="card-header">
+                  <h5 class="card-title mb-0">Annual Contacts</h5>
+                </div>
+                <row>
+                  <div class="card-body d-flex w-100">
+                    <div class="align-self-center chart chart-lg">
+                      <canvas id="chartjs-annual-contacts"></canvas>
+                    </div>
                   </div>
-                </div>
-              </div>
-              <h1 class="mt-1 mb-3">
-                <%= Contact.count %>
-              </h1>
-              <div class="mb-0">
-                <span class="text-primary"> <i class="mdi mdi-arrow-bottom-right"></i>
-                  <%= Contact.this_year.count %>
-                </span>
-                <span class="text-muted">This year</span>
+                </row>
               </div>
             </div>
           </div>
-          <div class="card">
-            <div class="card-body">
-              <div class="row">
-                <div class="col mt-0">
-                  <h5 class="card-title">DXCC</h5>
-                </div>
-
-                <div class="col-auto">
-                  <div class="stat text-primary">
-                    <i class="align-middle" data-feather="radio"></i>
-                  </div>
-                </div>
-              </div>
-              <h1 class="mt-1 mb-3">
-                <%= Country.where(worked: true).count %>
-              </h1>
-              <div class="mb-0">
-                <span class="text-primary"> <i class="mdi mdi-arrow-bottom-right"></i>
-                  <%= Contact.this_year.distinct.count(:dxcc_id) %>
-                </span>
-                <span class="text-muted">This year</span>
-              </div>
-            </div>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-xl-6 col-xxl-7">
-    <div class="card flex-fill w-100">
-      <div class="card-header">
-
-        <h5 class="card-title mb-0">Monthly Contacts | <%= Time.now.year %>
-        </h5>
-      </div>
-      <div class="card-body py-3">
-        <div class="chart chart-sm">
-          <canvas id="chartjs-monthly-contacts"></canvas>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-12 col-lg-8 col-xxl-9 d-flex">
-    <div class="card flex-fill">
-      <div class="card-header">
-
-        <h5 class="card-title mb-0">DXCC</h5>
-      </div>
-      <table class="table table-hover my-0">
-        <thead>
-          <tr>
-            <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">Country</th>
-            <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">80m</th>
-            <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">40m</th>
-            <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">30m</th>
-            <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">20m</th>
-            <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">17m</th>
-            <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">15m</th>
-            <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">12m</th>
-            <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">10m</th>
-            <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">6m</th>
-          </tr>
-          <tr>
-            <th class="d-none d-xl-table-cell">&nbsp;</th>
-            <th class="d-none d-xl-table-cell bg-light bg-gradient">
-              <%= Contact.select(:country).distinct.where(band: '80M' ).count %>
-            </th>
-            <th class="d-none d-xl-table-cell bg-light bg-gradient">
-              <%= Contact.select(:country).distinct.where(band: '40M' ).count %>
-            </th>
-            <th class="d-none d-xl-table-cell bg-light bg-gradient">
-              <%= Contact.select(:country).distinct.where(band: '30M' ).count %>
-            </th>
-            <th class="d-none d-xl-table-cell bg-light bg-gradient">
-              <%= Contact.select(:country).distinct.where(band: '20M' ).count %>
-            </th>
-            <th class="d-none d-xl-table-cell bg-light bg-gradient ">
-              <%= Contact.select(:country).distinct.where(band: '17M' ).count %>
-            </th>
-            <th class="d-none d-xl-table-cell bg-light bg-gradient">
-              <%= Contact.select(:country).distinct.where(band: '15M' ).count %>
-            </th>
-            <th class="d-none d-xl-table-cell bg-light bg-gradient">
-              <%= Contact.select(:country).distinct.where(band: '12M' ).count %>
-            </th>
-            <th class="d-none d-xl-table-cell bg-light bg-gradient">
-              <%= Contact.select(:country).distinct.where(band: '10M' ).count %>
-            </th>
-            <th class="d-none d-xl-table-cell bg-light bg-gradient">
-              <%= Contact.select(:country).distinct.where(band: '6M' ).count %>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @slots.each do |slot| %>
-            <% @cty=Country.where('name=?', slot['country']).first %>
-              <% if @cty %>
-                <tr>
-                  <th class="d-none d-xl-table-cell">
-                    <%= link_to slot['country'], controller: 'countries' , action: 'show' , id: @cty.id %>
-                  </th>
-                  <th class="d-none d-xl-table-cell">
-                    <%= slot['80m'] %>
-                  </th>
-                  <th class="d-none d-xl-table-cell">
-                    <%= slot['40m'] %>
-                  </th>
-                  <th class="d-none d-xl-table-cell">
-                    <%= slot['30m'] %>
-                  </th>
-                  <th class="d-none d-xl-table-cell">
-                    <%= slot['20m'] %>
-                  </th>
-                  <th class="d-none d-xl-table-cell">
-                    <%= slot['17m'] %>
-                  </th>
-                  <th class="d-none d-xl-table-cell">
-                    <%= slot['15m'] %>
-                  </th>
-                  <th class="d-none d-xl-table-cell">
-                    <%= slot['12m'] %>
-                  </th>
-
-                  <th class="d-none d-xl-table-cell">
-                    <%= slot['10m'] %>
-                  </th>
-                  <th class="d-none d-xl-table-cell">
-                    <%= slot['6m'] %>
-                  </th>
-
-                </tr>
-                <% end %>
-                  <% end %>
-        </tbody>
-      </table>
-    </div>
-  </div>
-  <div class="col-12 col-lg-4 col-xxl-3 d-flex">
-    <div class="card flex-fill w-100">
-      <div class="card-header">
-        <h5 class="card-title mb-0">Annual Contacts</h5>
-      </div>
-      <row>
-        <div class="card-body d-flex w-100">
-          <div class="align-self-center chart chart-lg">
-            <canvas id="chartjs-annual-contacts"></canvas>
+          </main>
           </div>
-        </div>
-      </row>
-    </div>
-  </div>
-</div>
-</div>
-</main>
-</div>
-</div>
+          </div>
 
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    var ctx = document.getElementById("chartjs-monthly-contacts").getContext("2d");
-    var gradient = ctx.createLinearGradient(0, 0, 0, 225);
-    gradient.addColorStop(0, "rgba(215, 227, 244, 1)");
-    gradient.addColorStop(1, "rgba(215, 227, 244, 0)");
-    // Line chart
-    new Chart(document.getElementById("chartjs-monthly-contacts"), {
-      type: "line",
-      data: {
-        labels: <%= @monthly.keys.to_json.html_safe %>,
-      datasets: [{
-        label: "Contacts",
-        fill: true,
-        backgroundColor: gradient,
-        borderColor: window.theme.primary,
-        data:  <%= @monthly.values.to_json.html_safe %>
+          <script>
+            document.addEventListener("DOMContentLoaded", function () {
+              var ctx = document.getElementById("chartjs-monthly-contacts").getContext("2d");
+              var gradient = ctx.createLinearGradient(0, 0, 0, 225);
+              gradient.addColorStop(0, "rgba(215, 227, 244, 1)");
+              gradient.addColorStop(1, "rgba(215, 227, 244, 0)");
+              // Line chart
+              new Chart(document.getElementById("chartjs-monthly-contacts"), {
+                type: "line",
+                data: {
+                  labels: <%= @monthly.keys.to_json.html_safe %>,
+                datasets: [{
+                  label: "Contacts",
+                  fill: true,
+                  backgroundColor: gradient,
+                  borderColor: window.theme.primary,
+                  data:  <%= @monthly.values.to_json.html_safe %>
         }]
       },
-    options: {
-    maintainAspectRatio: false,
-    legend: {
-      display: false
-    },
-    tooltips: {
-      intersect: false
-    },
-    hover: {
-      intersect: true
-    },
-    plugins: {
-      filler: {
-        propagate: false
-      }
-    },
-    scales: {
-      xAxes: [{
-        reverse: true,
-        gridLines: {
-          color: "rgba(0,0,0,0.0)"
-        }
-      }],
-      yAxes: [{
-        ticks: {
-          stepSize: 50,
-          max: 300
-        },
-        display: true,
-        borderDash: [3, 3],
-        gridLines: {
-          color: "rgba(0,0,0,0.0)"
-        }
-      }]
-    }
-  }
+              options: {
+              maintainAspectRatio: false,
+              legend: {
+                display: false
+              },
+              tooltips: {
+                intersect: false
+              },
+              hover: {
+                intersect: true
+              },
+              plugins: {
+                filler: {
+                  propagate: false
+                }
+              },
+              scales: {
+                xAxes: [{
+                  reverse: true,
+                  gridLines: {
+                    color: "rgba(0,0,0,0.0)"
+                  }
+                }],
+                yAxes: [{
+                  ticks: {
+                    stepSize: 50,
+                    max: 300
+                  },
+                  display: true,
+                  borderDash: [3, 3],
+                  gridLines: {
+                    color: "rgba(0,0,0,0.0)"
+                  }
+                }]
+              }
+            }
     });
   });
-</script>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    // Bar chart
-    new Chart(document.getElementById("chartjs-annual-contacts"), {
-      type: "bar",
-      data: {
-        labels: <%= @annual.keys.to_json.html_safe %>,
-      datasets: [{
-        label: "This year",
-        backgroundColor: window.theme.primary,
-        borderColor: window.theme.primary,
-        hoverBackgroundColor: window.theme.primary,
-        hoverBorderColor: window.theme.primary,
-        data: <%= @annual.values.to_json.html_safe %>,
-      barPercentage: .75,
-      categoryPercentage: .5
+          </script>
+          <script>
+            document.addEventListener("DOMContentLoaded", function () {
+              // Bar chart
+              new Chart(document.getElementById("chartjs-annual-contacts"), {
+                type: "bar",
+                data: {
+                  labels: <%= @annual.keys.to_json.html_safe %>,
+                datasets: [{
+                  label: "This year",
+                  backgroundColor: window.theme.primary,
+                  borderColor: window.theme.primary,
+                  hoverBackgroundColor: window.theme.primary,
+                  hoverBorderColor: window.theme.primary,
+                  data: <%= @annual.values.to_json.html_safe %>,
+                barPercentage: .75,
+                categoryPercentage: .5
         }]
       },
-    options: {
-    maintainAspectRatio: false,
-    legend: {
-      display: false
-    },
-    scales: {
-      yAxes: [{
-        gridLines: {
-          display: false
-        },
-        stacked: false,
-        ticks: {
-          stepSize: 100,
-          max: 1000
-        }
-      }],
-      xAxes: [{
-        stacked: false,
-        gridLines: {
-          color: "transparent"
-        }
-      }]
-    }
-  }
+              options: {
+              maintainAspectRatio: false,
+              legend: {
+                display: false
+              },
+              scales: {
+                yAxes: [{
+                  gridLines: {
+                    display: false
+                  },
+                  stacked: false,
+                  ticks: {
+                    stepSize: 100,
+                    max: 1000
+                  }
+                }],
+                xAxes: [{
+                  stacked: false,
+                  gridLines: {
+                    color: "transparent"
+                  }
+                }]
+              }
+            }
     });
   });
-</script>
+          </script>
