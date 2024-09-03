@@ -1,11 +1,7 @@
 class WelcomeController < ApplicationController
-<<<<<<< HEAD
-  
-=======
   before_action :authenticate_user!
 
 
->>>>>>> 6b232bb06013aaa22948154ac3244b378b992319
   def index
   @last = Contact.last
   @monthly = Contact.this_year.group_by_month(:qso_date, format: "%b %Y").count
