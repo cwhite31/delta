@@ -1,4 +1,5 @@
 class WelcomeController < ApplicationController
+  
   def index
   @last = Contact.last
   @monthly = Contact.this_year.group_by_month(:qso_date, format: "%b %Y").count
