@@ -9,11 +9,11 @@ class WelcomeController < ApplicationController
   @bands = Contact.select(:band).distinct
 
 
-  sql_source = "'select country, band, count(band) from contacts c where band != ''17m'' group by country, band order by 1,2 desc'"
+  sql_source = "'select country, band, count(band) from contacts c  group by country, band order by 1,2 desc'"
   sql_cat = "'select distinct band from contacts dxcc order by 1'"
-  sql = "select * from crosstab(" + sql_source + ", " + sql_cat + ') AS ct(country text, "10m" int, "12m" int, "15m" int, "20m" int, "40m" int, "6m" int);'
+  # sql = "select * from crosstab(" + sql_source + ", " + sql_cat + ') AS ct(country text, "10m" int, "12m" int, "15m" int, "20m" int, "40m" int, "6m" int);'
   #add 17m
-  #  sql = "select * from crosstab(" + sql_source + ", " + sql_cat + ') AS ct(country text, "10m" int, "12m" int, "15m" int, "17m" int, "20m" int, "40m" int, "6m" int);'
+ sql = "select * from crosstab(" + sql_source + ", " + sql_cat + ') AS ct(country text, "10m" int, "12m" int, "15m" int, "17m" int, "20m" int, "40m" int, "6m" int);'
   @slots = ActiveRecord::Base.connection.execute(sql)
   end
 end
