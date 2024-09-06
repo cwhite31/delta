@@ -54,7 +54,6 @@ gem "sassc-rails"
 # app specific
 gem "awesome_print", require: "ap"
 gem 'devise', '~> 4.9.2'
-gem 'filterrific', "5.2.3"
 gem "groupdate"
 gem "name_of_person"
 gem "will_paginate",  '~> 3.3.1'

@@ -1,13 +1,6 @@
 class Contact < ApplicationRecord
 
-  filterrific(
-    default_filter_params: { sorted_by: "created_at desc" },
-    available_filters: [
-      :sorted_by,
-      :search_query,
-      :country,
-    ],
-  )
+
   scope :sorted_by, ->(sort_key) { order(sort_key) }
   scope :this_year,-> { where('extract(year from qso_date) = ?', Time.now.year)}
   scope :in_last_month,-> { where('qso_date > ?', 1.month.ago)}
