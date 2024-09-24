@@ -4,9 +4,12 @@ class ContactsController < ApplicationController
 
   # GET /contacts or /contacts.json
   def index
-    # Initialize filterrific
-    @contacts = Contact.paginate(page: params[:page]).order(qso_date: :desc)
-# @contacts = Contact.order(qso_date: :desc).first(10)
+    if params.has_key?(:callsign)
+    @contacts = Contact
+    .where('callsign LIKE ?', params[:callsign].upcase + '%').paginate(page: params[:page]).order(qso_date: :desc)
+    else
+      @contacts = Contact.paginate(page: params[:page]).order(qso_date: :desc)
+    end
   end
 
   # GET /contacts/1 or /contacts/1.json

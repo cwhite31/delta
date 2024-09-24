@@ -49,7 +49,12 @@
         <a class="sidebar-toggle js-sidebar-toggle">
           <i class="hamburger align-self-center"></i>
         </a>
-
+        <div>
+          <%= form_with url: "/contacts" , method: :get do |form| %>
+            <%= form.text_field :callsign %>
+              <%= form.submit "Search", class: "btn btn-outline-primary btn-sm m-0" %>
+                <% end %>
+        </div>
         <div class="navbar-collapse collapse">
           <ul class="navbar-nav navbar-align">
             <li class="nav-item dropdown">
