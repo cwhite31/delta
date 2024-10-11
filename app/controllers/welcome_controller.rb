@@ -7,6 +7,8 @@ class WelcomeController < ApplicationController
   @monthly = Contact.this_year.group_by_month(:qso_date, format: "%b %Y").count
   @annual = Contact.group_by_year(:qso_date, format: "%Y").count
   @bands = Contact.select(:band).distinct
+  @gridsquares = Contact.select(:gridsquare).distinct.count
+  @gridsquares_this_year = Contact.select(:gridsquare).this_year.distinct.count
 
 
   sql_source = "'select country, band, count(band) from contacts c group by country, band order by 1,2 desc'"
