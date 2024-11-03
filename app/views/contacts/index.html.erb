@@ -43,18 +43,30 @@
           <div class="card-body">
             <h5>Contacts</h5>
             Total: <%= Contact.count %><br />
-              Year: <%= Contact.where('EXTRACT(YEAR FROM qso_date)=?', Date.current.year).count %><br />
-                Month: <%= Contact.where('EXTRACT(MONTH FROM qso_date)=?', Date.current.month).count %><br />
+            Unique: <%= Contact.count('DISTINCT callsign') %><br />
+            <%= Date.today.strftime("%Y") %>: <%= Contact.where('EXTRACT(YEAR FROM qso_date)=?', Date.current.year).count %><br />
+              <%= Date.today.strftime("%B") %>: <%= Contact.where('EXTRACT(MONTH FROM qso_date)=? and EXTRACT(YEAR FROM qso_date)=?', Date.current.month, Date.current.year).count %><br />
           </div>
         </div>
         <div class="card">
           <div class="card-body">
             <h5>Countries</h5>
-            Total: <%= Contact.count('DISTINCT dxcc_id') %><br />
-              Year: <%= Contact.where('EXTRACT(YEAR FROM qso_date)=?', Date.current.year).count('DISTINCT dxcc_id') %>
-                <br />
-                Month: <%= Contact.where('EXTRACT(MONTH FROM qso_date)=?', Date.current.month).count('DISTINCT dxcc_id')
-                  %><br />
+            Total: <%= Country.where(worked: true).count %><br />
+              Confirmed: <%= Country.where(worked: true, confirmed: true).count %><br />
+              <%= Date.today.strftime("%Y") %>: <%= Contact.where('EXTRACT(YEAR FROM qso_date)=?', Date.current.year).count('DISTINCT dxcc_id') %>
+                  <br />
+                  <%= Date.today.strftime("%B") %>: <%= Contact.where('EXTRACT(MONTH FROM qso_date)=? and EXTRACT(YEAR FROM qso_date)=?', Date.current.month, Date.current.year).count('DISTINCT
+                    dxcc_id') %><br />
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <h5>Grid Squares</h5>
+            Total: <%= Contact.count('DISTINCT gridsquare') %><br />
+            <%= Date.today.strftime("%Y") %>: <%= Contact.where('EXTRACT(YEAR FROM qso_date)=?', Date.current.year).count('DISTINCT gridsquare') %>
+                  <br />
+                  <%= Date.today.strftime("%B") %>: <%= Contact.where('EXTRACT(MONTH FROM qso_date)=? and EXTRACT(YEAR FROM qso_date)=?', Date.current.month, Date.current.year).count('DISTINCT
+                  gridsquare') %><br />
           </div>
         </div>
         <div class="card">
