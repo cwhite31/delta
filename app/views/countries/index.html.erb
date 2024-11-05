@@ -201,7 +201,7 @@
                   <%= Date.current.strftime("%B") %>:
                 </td>
                 <td>
-                  <%= Contact.where('EXTRACT(MONTH FROM qso_date)=?', Date.current.month).count('DISTINCT dxcc_id') %>
+                  <%= Contact.where('EXTRACT(MONTH FROM qso_date)=? AND EXTRACT(Year FROM qso_date)=?', Date.current.month, Date.current.year).count('DISTINCT dxcc_id') %>
                 </td>
               </tr>
             </tbody>
@@ -234,7 +234,7 @@
                   <%= Date.current.strftime("%B") %>:
                 </td>
                 <td>
-                  <%= Contact.where('EXTRACT(MONTH FROM qso_date)=?', Date.current.month).count('DISTINCT gridsquare') %>
+                  <%= Contact.where('EXTRACT(MONTH FROM qso_date)=? AND EXTRACT(Year FROM qso_date)=?', Date.current.month, Date.current.year).count('DISTINCT gridsquare') %>
                 </td>
               </tr>
             </tbody>
