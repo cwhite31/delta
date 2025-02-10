@@ -1,0 +1,76 @@
+  <div class="row">
+    <div class="col-12 col-lg-8 col-xxl-9 d-flex">
+      <div class="card flex-fill">
+        <div class="card-header">
+
+          <h5 class="card-title mb-0">US States</h5>
+        </div>
+        <table class="table table-hover my-0">
+          <thead>
+            <tr>
+              <th>State</th>
+              <th class="d-none d-xl-table-cell">40m</th>
+              <th class="d-none d-xl-table-cell">30m</th>
+              <th class="d-none d-xl-table-cell">20m</th>
+              <th class="d-none d-xl-table-cell">17m</th>
+              <th class="d-none d-xl-table-cell">15m</th>
+              <th class="d-none d-xl-table-cell">12m</th>
+              <th class="d-none d-xl-table-cell">10m</th>
+              <th class="d-none d-xl-table-cell">TOTAL</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% index = 0 %>
+            <% @us_states.each do |us_state| %>
+            <% index +=1   %>
+            <tr>
+              <td class="d-none d-xl-table-cell">
+                  <%= us_state['state'] %>
+              </td>
+              <td class="d-none d-xl-table-cell">
+                <%= us_state['40m'] %>
+              </td>
+              <td class="d-none d-xl-table-cell">
+                  <%= us_state['30m'] %>
+              </td>
+              <td class="d-none d-xl-table-cell">
+                <%= us_state['20m'] %>
+              </td>
+              <td class="d-none d-xl-table-cell">
+                <%= us_state['17m'] %>
+              </td>
+              <td class="d-none d-xl-table-cell">
+                <%= us_state['15m'] %>
+              </td>
+              <td class="d-none d-xl-table-cell">
+                <%= us_state['12m'] %>
+              </td>
+              <td class="d-none d-xl-table-cell">
+                <%= us_state['10m'] %>
+              </td>
+              <td class="d-none d-xl-table-cell">
+                <%= us_state['10m'].to_i + us_state['12m'].to_i + us_state['15m'].to_i + us_state['20m'].to_i + us_state['30m'].to_i + us_state['40m'].to_i %>
+              </td>
+          </tr>
+          <% if [10, 20, 30,40,50,60,60,80,90,100].include?(index) %>
+                <th>State</th>
+                  <th class="d-none d-xl-table-cell">40m</th>
+                  <th class="d-none d-xl-table-cell">30m</th>
+                  <th class="d-none d-xl-table-cell">20m</th>
+                  <th class="d-none d-xl-table-cell">17m</th>
+                  <th class="d-none d-xl-table-cell">15m</th>
+                  <th class="d-none d-xl-table-cell">12m</th>
+                  <th class="d-none d-xl-table-cell">10m</th>
+                  <th class="d-none d-xl-table-cell">TOTAL</th>
+                <% end %>
+                <% end %>
+                
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+  </div>
+  </row>
+  </div>
+  <%= link_to "New contact" , new_contact_path %>
