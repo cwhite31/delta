@@ -9,6 +9,11 @@ Rails.application.routes.draw do
     end
   end
   resources :countries
+  resources :reports do
+    collection do
+      get "us_states"
+    end
+  end
 
 
 end

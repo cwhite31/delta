@@ -1,68 +1,73 @@
-      <div class="container-fluid p-0 mt-0">
-        <div class="mb-3">
-          <h1 class="h2 d-inline align-middle">
-            <%= @contact.callsign %>
-          </h1>
+<div class="container-fluid p-0 mt-0">
+  <div class="mb-3">
+    <h1 class="h2 d-inline align-middle">
+      <%= @contact.callsign %>
+    </h1>
+  </div>
+  <div class="row">
+    <div class="col-md-4 col-xl-3">
+      <div class="card mb-3">
+        <div class="card-header">
+          <h5 class="card-title mb-0">Profile Details</h5>
         </div>
-        <div class="row">
-          <div class="col-md-4 col-xl-3">
-            <div class="card mb-3">
-              <div class="card-header">
-                <h5 class="card-title mb-0">Profile Details</h5>
-              </div>
-              <div class="card-body text-left">
-                <div class="card-body">
-                  <ul class="list-unstyled mb-0">
-                    <li class="mb-1"><span data-feather="home" class="feather-sm me-1"></span>
-                      <%= @contact.country %>
-                    </li>
-                    <li class="mb-1"><span data-feather="map" class="feather-sm me-1"></span>
-                      <%= @contact.state %>
-                    </li>
-                    <li class="mb-1"><span data-feather="grid" class="feather-sm me-1"></span>
-                      <%= @contact.gridsquare %>
-                    </li>
+        <div class="card-body text-left">
+          <div class="card-body">
+            <ul class="list-unstyled mb-0">
+              <li class="mb-1"><span data-feather="home" class="feather-sm me-1"></span>
+                <%= @contact.country %>
+              </li>
+              <% if @contact.state? %>
+              <li class="mb-1"><span data-feather="map" class="feather-sm me-1"></span>
+                <%= @contact.state %>
+              </li>
+              <% end %>
+              <li class="mb-1"><span data-feather="grid" class="feather-sm me-1"></span>
+                <%= @contact.gridsquare %>
+              </li>
+              <li class="mb-1"><span data-feather="external-link" class="feather-sm me-1"></span>
+                <%= link_to 'QRZ.com' , 'https://www.qrz.com/db/' , target: @contact.callsign %>
+              </li>
 
-                  </ul>
-                </div>
-              </div>
-            </div>
+            </ul>
           </div>
-          <div class="col-md-8 col-xl-9">
-            <div class="card">
-              <div class="card-header">
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8 col-xl-9">
+      <div class="card">
+        <div class="card-header">
 
-                <h5 class="card-title mb-0">Contacts</h5>
-              </div>
-              <div class="card-body h-100">
+          <h5 class="card-title mb-0">Contacts</h5>
+        </div>
+        <div class="card-body h-100">
 
 
 
 
-                <table class="table table-hover my-0">
-                  <thead>
-                    <tr>
-                      <th>Date</th>
-                      <th>Time</th>
-                      <th class="d-none d-xl-table-cell">Callsign</th>
-                      <th class="d-none d-xl-table-cell">Band</th>
-                      <th>Mode</th>
-                      <th>Sent</th>
-                      <th>Recv</th>
-                      <th class="d-none d-md-table-cell">Confirmed</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <% @contacts.each do |contact| %>
-                      <%= render contact %>
-                        <% end %>
-                  </tbody>
-                </table>
-              </div>
+          <table class="table table-hover my-0">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Time</th>
+                <th class="d-none d-xl-table-cell">Callsign</th>
+                <th class="d-none d-xl-table-cell">Band</th>
+                <th>Mode</th>
+                <th>Sent</th>
+                <th>Recv</th>
+                <th class="d-none d-md-table-cell">Confirmed</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @contacts.each do |contact| %>
+                <%= render contact %>
+                  <% end %>
+            </tbody>
+          </table>
+        </div>
 
-            </div>
+      </div>
 
-            <hr />
-          </div>
+      <hr />
+    </div>
   </div>
 </div>
