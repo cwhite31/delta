@@ -17,16 +17,16 @@
                 <%= @contact.country %>
               </li>
               <% if @contact.state? %>
-              <li class="mb-1"><span data-feather="map" class="feather-sm me-1"></span>
-                <%= @contact.state %>
-              </li>
-              <% end %>
-              <li class="mb-1"><span data-feather="grid" class="feather-sm me-1"></span>
-                <%= @contact.gridsquare %>
-              </li>
-              <li class="mb-1"><span data-feather="external-link" class="feather-sm me-1"></span>
-                <%= link_to 'QRZ.com' , 'https://www.qrz.com/db/' , target: @contact.callsign %>
-              </li>
+                <li class="mb-1"><span data-feather="map" class="feather-sm me-1"></span>
+                  <%= @contact.state %>
+                </li>
+                <% end %>
+                  <li class="mb-1"><span data-feather="grid" class="feather-sm me-1"></span>
+                    <%= @contact.gridsquare %>
+                  </li>
+                  <li class="mb-1"><span data-feather="external-link" class="feather-sm me-1"></span>
+                    <%= link_to 'QRZ.com' , 'https://www.qrz.com/db/' + @contact.callsign %>
+                  </li>
 
             </ul>
           </div>
