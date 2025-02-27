@@ -55,7 +55,7 @@
             <div class="card-body">
               <div class="row">
                 <div class="col mt-0">
-                  <h5 class="card-title">Grid Squares</h5>
+                  <h5 class="card-title">Grids</h5>
                 </div>
                 <div class="col-auto">
                   <div class="stat text-primary">
@@ -80,7 +80,7 @@
             <div class="card-body">
               <div class="row">
                 <div class="col mt-0">
-                  <h5 class="card-title">Total</h5>
+                  <h5 class="card-title">Contacts</h5>
                 </div>
 
                 <div class="col-auto">
@@ -119,6 +119,30 @@
               <div class="mb-0">
                 <span class="text-primary"> <i class="mdi mdi-arrow-bottom-right"></i>
                   <%= Contact.this_year.distinct.count(:dxcc_id) %>
+                </span>
+                <span class="text-muted">This year</span>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <div class="row">
+                <div class="col mt-0">
+                  <h5 class="card-title">Prefixes</h5>
+                </div>
+
+                <div class="col-auto">
+                  <div class="stat text-primary">
+                    <i class="align-middle" data-feather="radio"></i>
+                  </div>
+                </div>
+              </div>
+              <h1 class="mt-1 mb-3">
+                <%= @prefixes %>
+              </h1>
+              <div class="mb-0">
+                <span class="text-primary"> <i class="mdi mdi-arrow-bottom-right"></i>
+                  <%= @prefixes_this_year %>
                 </span>
                 <span class="text-muted">This year</span>
               </div>
@@ -200,57 +224,54 @@
         <tbody>
           <% index=0 %>
             <% @slots.each do |slot| %>
-              <% @cty=Country.where('name=?', slot['country']).first %>
-                <% if @cty %>
-                  <% index +=1   %>
-                    <tr>
-                      <th class="d-none d-xl-table-cell">
-                        <%= link_to slot['country'], controller: 'countries' , action: 'show' , id: @cty.id %>
-                      </th>
-                      <th class="d-none d-xl-table-cell">
-                        <%= slot['80m'] %>
-                      </th>
-                      <th class="d-none d-xl-table-cell">
-                        <%= slot['40m'] %>
-                      </th>
-                      <th class="d-none d-xl-table-cell">
-                        <%= slot['30m'] %>
-                      </th>
-                      <th class="d-none d-xl-table-cell">
-                        <%= slot['20m'] %>
-                      </th>
-                      <th class="d-none d-xl-table-cell">
-                        <%= slot['17m'] %>
-                      </th>
-                      <th class="d-none d-xl-table-cell">
-                        <%= slot['15m'] %>
-                      </th>
-                      <th class="d-none d-xl-table-cell">
-                        <%= slot['12m'] %>
-                      </th>
-                      <th class="d-none d-xl-table-cell">
-                        <%= slot['10m'] %>
-                      </th>
-                      <th class="d-none d-xl-table-cell">
-                        <%= slot['6m'] %>
-                      </th>
-                    </tr>
-                    <% if [10, 20, 30,40,50,60,60,80,90,100].include?(index) %>
-                      <tr>
-                        <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">Country</th>
-                        <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">80m</th>
-                        <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">40m</th>
-                        <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">30m</th>
-                        <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">20m</th>
-                        <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">17m</th>
-                        <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">15m</th>
-                        <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">12m</th>
-                        <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">10m</th>
-                        <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">6m</th>
-                      </tr>
-                      <% end %>
-                        <% end %>
-                          <% end %>
+              <% index +=1 %>
+                <tr>
+                  <th class="d-none d-xl-table-cell">
+                    <%= link_to slot['country'], controller: 'countries' , action: 'show' , id: slot['id'] %>
+                  </th>
+                  <th class="d-none d-xl-table-cell">
+                    <%= slot['80m'] %>
+                  </th>
+                  <th class="d-none d-xl-table-cell">
+                    <%= slot['40m'] %>
+                  </th>
+                  <th class="d-none d-xl-table-cell">
+                    <%= slot['30m'] %>
+                  </th>
+                  <th class="d-none d-xl-table-cell">
+                    <%= slot['20m'] %>
+                  </th>
+                  <th class="d-none d-xl-table-cell">
+                    <%= slot['17m'] %>
+                  </th>
+                  <th class="d-none d-xl-table-cell">
+                    <%= slot['15m'] %>
+                  </th>
+                  <th class="d-none d-xl-table-cell">
+                    <%= slot['12m'] %>
+                  </th>
+                  <th class="d-none d-xl-table-cell">
+                    <%= slot['10m'] %>
+                  </th>
+                  <th class="d-none d-xl-table-cell">
+                    <%= slot['6m'] %>
+                  </th>
+                </tr>
+                <% if [10, 20, 30,40,50,60,60,80,90,100].include?(index) %>
+                  <tr>
+                    <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">Country</th>
+                    <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">80m</th>
+                    <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">40m</th>
+                    <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">30m</th>
+                    <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">20m</th>
+                    <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">17m</th>
+                    <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">15m</th>
+                    <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">12m</th>
+                    <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">10m</th>
+                    <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">6m</th>
+                  </tr>
+                  <% end %>
+                    <% end %>
         </tbody>
       </table>
     </div>

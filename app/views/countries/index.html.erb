@@ -1,5 +1,4 @@
-<row% content_for :title, "Contacts" %>
-
+<% content_for :title, "Contacts" %>
   <div class="row">
     <div class="col-12 col-lg-8 col-xxl-9 d-flex">
       <div class="card flex-fill">
@@ -23,78 +22,77 @@
           </thead>
           <tbody>
             <% @countries.each.with_index do |country, index| %>
-              <div id="<%= dom_id country %>">
-                <tr>
-                  <td style='<%= country.worked ? "background:#fff;" : "background:#ffcccc;" %>''>
+              <tr id="<%= dom_id country %>">
+
+                <td style='<%= country.worked ? "background:#fff;" : "background:#ffcccc;" %>''>
                       <%= country.prefix %>
                   </td>
                   <td style="<%= country.worked ? ' background:#fff;' : 'background:#ffcccc;' %>">
-                    <%= country.name %>
-                  </td>
-                  <td class="d-none d-xl-table-cell"
-                    style="<%= country.worked ? 'background:#fff;' : 'background:#ffcccc;' %>">
-                    <% if country['80m'] %>
-                      <i class="align-middle" data-feather="radio"></i>
-                      <% end %>
-                  </td>
-                  <td class="d-none d-xl-table-cell"
-                    style="<%= country.worked ? 'background:#fff;' : 'background:#ffcccc;' %>">
-                    <% if country['40m'] %>
-                      <i class="align-middle" data-feather="radio"></i>
-                      <% end %>
-                  </td>
-                  <td class="d-none d-xl-table-cell"
-                    style="<%= country.worked ? 'background:#fff;' : 'background:#ffcccc;' %>">
-                    <% if country['30m'] %>
-                      <i class="align-middle" data-feather="radio"></i>
-                      <% end %>
-                  </td>
-                  <td class="d-none d-xl-table-cell"
-                    style="<%= country.worked ? 'background:#fff;' : 'background:#ffcccc;' %>">
-                    <% if country['20m'] %>
-                      <i class="align-middle" data-feather="radio"></i>
-                      <% end %>
-                  </td>
-                  <td class="d-none d-xl-table-cell"
-                    style="<%= country.worked ? 'background:#fff;' : 'background:#ffcccc;' %>">
-                    <% if country['17m'] %>
-                      <i class="align-middle" data-feather="radio"></i>
-                      <% end %>
-                  </td>
-                  <td class="d-none d-xl-table-cell"
-                    style="<%= country.worked ? 'background:#fff;' : 'background:#ffcccc;' %>">
-                    <% if country['15m'] %>
-                      <i class="align-middle" data-feather="radio"></i>
-                      <% end %>
-                  </td>
-                  <td class="d-none d-xl-table-cell"
-                    style="<%= country.worked ? 'background:#fff;' : 'background:#ffcccc;' %>">
-                    <% if country['12m'] %>
-                      <i class="align-middle" data-feather="radio"></i>
-                      <% end %>
-                  </td>
-                  <td class="d-none d-xl-table-cell"
-                    style="<%= country.worked ? 'background:#fff;' : 'background:#ffcccc;' %>">
-                    <% if country['10m'] %>
-                      <i class="align-middle" data-feather="radio"></i>
-                      <% end %>
-                  </td>
+                  <%= country.name %>
+                </td>
+                <td class="d-none d-xl-table-cell"
+                  style="<%= country.worked ? 'background:#fff;' : 'background:#ffcccc;' %>">
+                  <% if country['80m'] %>
+                    <i class="align-middle" data-feather="radio"></i>
+                    <% end %>
+                </td>
+                <td class="d-none d-xl-table-cell"
+                  style="<%= country.worked ? 'background:#fff;' : 'background:#ffcccc;' %>">
+                  <% if country['40m'] %>
+                    <i class="align-middle" data-feather="radio"></i>
+                    <% end %>
+                </td>
+                <td class="d-none d-xl-table-cell"
+                  style="<%= country.worked ? 'background:#fff;' : 'background:#ffcccc;' %>">
+                  <% if country['30m'] %>
+                    <i class="align-middle" data-feather="radio"></i>
+                    <% end %>
+                </td>
+                <td class="d-none d-xl-table-cell"
+                  style="<%= country.worked ? 'background:#fff;' : 'background:#ffcccc;' %>">
+                  <% if country['20m'] %>
+                    <i class="align-middle" data-feather="radio"></i>
+                    <% end %>
+                </td>
+                <td class="d-none d-xl-table-cell"
+                  style="<%= country.worked ? 'background:#fff;' : 'background:#ffcccc;' %>">
+                  <% if country['17m'] %>
+                    <i class="align-middle" data-feather="radio"></i>
+                    <% end %>
+                </td>
+                <td class="d-none d-xl-table-cell"
+                  style="<%= country.worked ? 'background:#fff;' : 'background:#ffcccc;' %>">
+                  <% if country['15m'] %>
+                    <i class="align-middle" data-feather="radio"></i>
+                    <% end %>
+                </td>
+                <td class="d-none d-xl-table-cell"
+                  style="<%= country.worked ? 'background:#fff;' : 'background:#ffcccc;' %>">
+                  <% if country['12m'] %>
+                    <i class="align-middle" data-feather="radio"></i>
+                    <% end %>
+                </td>
+                <td class="d-none d-xl-table-cell"
+                  style="<%= country.worked ? 'background:#fff;' : 'background:#ffcccc;' %>">
+                  <% if country['10m'] %>
+                    <i class="align-middle" data-feather="radio"></i>
+                    <% end %>
+                </td>
+              </tr>
+              <% if [10, 20, 30,40,50,60,60,80,90,100].include?(index) %>
+                <tr>
+                  <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white" colspan="2">Entity</th>
+                  <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">80m</th>
+                  <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">40m</th>
+                  <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">30m</th>
+                  <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">20m</th>
+                  <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">17m</th>
+                  <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">15m</th>
+                  <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">12m</th>
+                  <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">10m</th>
                 </tr>
-                <% if [10, 20, 30,40,50,60,60,80,90,100].include?(index) %>
-                  <tr>
-                    <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white" colspan="2">Entity</th>
-                    <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">80m</th>
-                    <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">40m</th>
-                    <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">30m</th>
-                    <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">20m</th>
-                    <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">17m</th>
-                    <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">15m</th>
-                    <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">12m</th>
-                    <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">10m</th>
-                  </tr>
+                <% end %>
                   <% end %>
-              </div>
-              <% end %>
           </tbody>
         </table>
       </div>

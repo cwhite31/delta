@@ -35,12 +35,32 @@
             <table>
               <tbody>
                 <% @bands.keys.sort.each do |key, value| %>
-                <tr>
-                  <td>
-                    <%=h "#{key.to_s} #{@bands[key]}" %>
-                  </td>
-                </tr>
-                <% end %>
+                  <tr>
+                    <td>
+                      <%=h "#{key.to_s} #{@bands[key]}" %>
+                    </td>
+                  </tr>
+                  <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="card mb-3">
+        <div class="card-header">
+          <h5 class="card-title mb-0">Prefixes</h5>
+        </div>
+        <div class="card-body text-left">
+          <div class="card-body">
+            <table>
+              <tbody>
+                <% @prefixes.each do |prefix| %>
+                  <tr>
+                    <td>
+                      <%= prefix.prefix %>
+                    </td>
+                  </tr>
+                  <% end %>
               </tbody>
             </table>
           </div>
@@ -54,16 +74,11 @@
           <h5 class="card-title mb-0">Contacts</h5>
         </div>
         <div class="card-body h-100">
-
-
-
-
           <table class="table table-hover my-0">
             <thead>
               <tr>
-                <th>Date</th>
-                <th>Time</th>
                 <th class="d-none d-xl-table-cell">Callsign</th>
+                <th>Date</th>
                 <th class="d-none d-xl-table-cell">Band</th>
                 <th>Mode</th>
                 <th>Sent</th>
@@ -73,7 +88,35 @@
             </thead>
             <tbody>
               <% @contacts.each do |contact| %>
-                <%= render contact %>
+              <div id="<%= dom_id contact %>">
+                <tr>
+                    <td class="d-none d-xl-table-cell">
+                        <%= link_to contact.callsign, contact_path(contact) %>
+                    </td>
+                    <td>
+                        <%= contact.qso_date %> <%= contact.time_on[0..1] %>:<%= contact.time_on[2..3] %>
+                    </td>
+                    <td class="d-none d-xl-table-cell">
+                        <%= contact.band %>
+                    </td>
+                    <td><span class="badge bg-success">
+                            <%= contact.mode %>
+                        </span></td>
+                    <td class="d-none d-xl-table-cell">
+                        <%=contact.signal_report_sent %>
+                    </td>
+                    <td class="d-none d-xl-table-cell">
+                        <%=contact.signal_report_received %>
+                    </td>
+                    <td class="d-none d-md-table-cell">
+                        <% if contact.qsl_received %>
+                            <i data-feather="check" class="text-success"></i>
+                            <% else %>
+                                <i data-feather="x-circle" class="text-secondary"></i>
+                                <% end %>
+                    </td>
+                </tr>
+            </div>
                   <% end %>
             </tbody>
           </table>

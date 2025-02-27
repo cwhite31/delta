@@ -3,12 +3,12 @@
     <div class="card flex-fill">
       <div class="card-header">
 
-        <h5 class="card-title mb-0">US States</h5>
+        <h5 class="card-title mb-0">Unique Prefixes</h5>
       </div>
       <table class="table table-hover my-0">
         <thead>
           <tr>
-            <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">State</th>
+            <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">Country</th>
             <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">40m</th>
             <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">30m</th>
             <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">20m</th>
@@ -23,67 +23,67 @@
               
             </td>
             <td class="d-none d-xl-table-cell">
-              <%= Contact.select(:state).distinct.where(band: '40M' ).count %>
+              <%= Contact.select(:prefix).distinct.where(band: '40M' ).count %>
             </td>
             <td class="d-none d-xl-table-cell">
-              <%= Contact.select(:state).distinct.where(band: '30M' ).count %>
+              <%= Contact.select(:prefix).distinct.where(band: '30M' ).count %>
             </td>
             <td class="d-none d-xl-table-cell">
-              <%= Contact.select(:state).distinct.where(band: '20M' ).count %>
+              <%= Contact.select(:prefix).distinct.where(band: '20M' ).count %>
             </td>
             <td class="d-none d-xl-table-cell">
-              <%= Contact.select(:state).distinct.where(band: '17M' ).count %>
+              <%= Contact.select(:prefix).distinct.where(band: '17M' ).count %>
             </td>
             <td class="d-none d-xl-table-cell">
-              <%= Contact.select(:state).distinct.where(band: '15M' ).count %>
+              <%= Contact.select(:prefix).distinct.where(band: '15M' ).count %>
             </td>
             <td class="d-none d-xl-table-cell">
-              <%= Contact.select(:state).distinct.where(band: '12M' ).count %>
+              <%= Contact.select(:prefix).distinct.where(band: '12M' ).count %>
             </td>
             <td class="d-none d-xl-table-cell">
-              <%= Contact.select(:state).distinct.where(band: '10M' ).count %>
+              <%= Contact.select(:prefix).distinct.where(band: '10M' ).count %>
             </td>
             <td class="d-none d-xl-table-cell">
-              <%= Contact.select(:state).distinct.count %>
+              <%= Contact.select(:prefix).distinct.count %>
             </td>
           </tr>
         </thead>
         <tbody>
           <% index=0 %>
-            <% @us_states.each do |us_state| %>
+            <% @prefixes.each do |prefix| %>
               <% index +=1 %>
                 <tr>
                   <td class="d-none d-xl-table-cell">
-                    <%= us_state['state'] %>
+                    <%= prefix['country'] %>
                   </td>
                   <td class="d-none d-xl-table-cell">
-                    <%= us_state['40m'] %>
+                    <%= prefix['40m'] %>
                   </td>
                   <td class="d-none d-xl-table-cell">
-                    <%= us_state['30m'] %>
+                    <%= prefix['30m'] %>
                   </td>
                   <td class="d-none d-xl-table-cell">
-                    <%= us_state['20m'] %>
+                    <%= prefix['20m'] %>
                   </td>
                   <td class="d-none d-xl-table-cell">
-                    <%= us_state['17m'] %>
+                    <%= prefix['17m'] %>
                   </td>
                   <td class="d-none d-xl-table-cell">
-                    <%= us_state['15m'] %>
+                    <%= prefix['15m'] %>
                   </td>
                   <td class="d-none d-xl-table-cell">
-                    <%= us_state['12m'] %>
+                    <%= prefix['12m'] %>
                   </td>
                   <td class="d-none d-xl-table-cell">
-                    <%= us_state['10m'] %>
+                    <%= prefix['10m'] %>
                   </td>
                   <td class="d-none d-xl-table-cell">
-                    <%= us_state['10m'].to_i + us_state['12m'].to_i + us_state['15m'].to_i + us_state['20m'].to_i +
-                      us_state['30m'].to_i + us_state['40m'].to_i %>
+                    <%= prefix['10m'].to_i + prefix['12m'].to_i + prefix['15m'].to_i + prefix['20m'].to_i +
+                      prefix['30m'].to_i + prefix['40m'].to_i %>
                   </td>
                 </tr>
                 <% if [10, 20, 30,40,50,60,60,80,90,100].include?(index) %>
-                  <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">State</th>
+                  <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">Country</th>
                   <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">40m</th>
                   <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">30m</th>
                   <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">20m</th>

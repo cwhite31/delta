@@ -3,12 +3,12 @@
     <div class="card flex-fill">
       <div class="card-header">
 
-        <h5 class="card-title mb-0">US States</h5>
+        <h5 class="card-title mb-0">Unique Gridsquares</h5>
       </div>
       <table class="table table-hover my-0">
         <thead>
           <tr>
-            <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">State</th>
+            <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">Country</th>
             <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">40m</th>
             <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">30m</th>
             <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">20m</th>
@@ -23,67 +23,67 @@
               
             </td>
             <td class="d-none d-xl-table-cell">
-              <%= Contact.select(:state).distinct.where(band: '40M' ).count %>
+              <%= Contact.select(:gridsquare).distinct.where(band: '40M' ).count %>
             </td>
             <td class="d-none d-xl-table-cell">
-              <%= Contact.select(:state).distinct.where(band: '30M' ).count %>
+              <%= Contact.select(:gridsquare).distinct.where(band: '30M' ).count %>
             </td>
             <td class="d-none d-xl-table-cell">
-              <%= Contact.select(:state).distinct.where(band: '20M' ).count %>
+              <%= Contact.select(:gridsquare).distinct.where(band: '20M' ).count %>
             </td>
             <td class="d-none d-xl-table-cell">
-              <%= Contact.select(:state).distinct.where(band: '17M' ).count %>
+              <%= Contact.select(:gridsquare).distinct.where(band: '17M' ).count %>
             </td>
             <td class="d-none d-xl-table-cell">
-              <%= Contact.select(:state).distinct.where(band: '15M' ).count %>
+              <%= Contact.select(:gridsquare).distinct.where(band: '15M' ).count %>
             </td>
             <td class="d-none d-xl-table-cell">
-              <%= Contact.select(:state).distinct.where(band: '12M' ).count %>
+              <%= Contact.select(:gridsquare).distinct.where(band: '12M' ).count %>
             </td>
             <td class="d-none d-xl-table-cell">
-              <%= Contact.select(:state).distinct.where(band: '10M' ).count %>
+              <%= Contact.select(:gridsquare).distinct.where(band: '10M' ).count %>
             </td>
             <td class="d-none d-xl-table-cell">
-              <%= Contact.select(:state).distinct.count %>
+              <%= Contact.select(:gridsquare).distinct.count %>
             </td>
           </tr>
         </thead>
         <tbody>
           <% index=0 %>
-            <% @us_states.each do |us_state| %>
+            <% @grids.each do |grid| %>
               <% index +=1 %>
                 <tr>
                   <td class="d-none d-xl-table-cell">
-                    <%= us_state['state'] %>
+                    <%= grid['country'] %>
                   </td>
                   <td class="d-none d-xl-table-cell">
-                    <%= us_state['40m'] %>
+                    <%= grid['40m'] %>
                   </td>
                   <td class="d-none d-xl-table-cell">
-                    <%= us_state['30m'] %>
+                    <%= grid['30m'] %>
                   </td>
                   <td class="d-none d-xl-table-cell">
-                    <%= us_state['20m'] %>
+                    <%= grid['20m'] %>
                   </td>
                   <td class="d-none d-xl-table-cell">
-                    <%= us_state['17m'] %>
+                    <%= grid['17m'] %>
                   </td>
                   <td class="d-none d-xl-table-cell">
-                    <%= us_state['15m'] %>
+                    <%= grid['15m'] %>
                   </td>
                   <td class="d-none d-xl-table-cell">
-                    <%= us_state['12m'] %>
+                    <%= grid['12m'] %>
                   </td>
                   <td class="d-none d-xl-table-cell">
-                    <%= us_state['10m'] %>
+                    <%= grid['10m'] %>
                   </td>
                   <td class="d-none d-xl-table-cell">
-                    <%= us_state['10m'].to_i + us_state['12m'].to_i + us_state['15m'].to_i + us_state['20m'].to_i +
-                      us_state['30m'].to_i + us_state['40m'].to_i %>
+                    <%= grid['10m'].to_i + grid['12m'].to_i + grid['15m'].to_i + grid['20m'].to_i +
+                      grid['30m'].to_i + grid['40m'].to_i %>
                   </td>
                 </tr>
                 <% if [10, 20, 30,40,50,60,60,80,90,100].include?(index) %>
-                  <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">State</th>
+                  <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">Country</th>
                   <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">40m</th>
                   <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">30m</th>
                   <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">20m</th>

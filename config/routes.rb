@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   resources :reports do
     collection do
       get "us_states"
+      get "gridsquares"
+      get "prefixes"
     end
   end
 

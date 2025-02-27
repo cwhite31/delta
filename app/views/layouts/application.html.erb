@@ -40,10 +40,12 @@
             </a>
           </li>
 
-          <li class="sidebar-item dropdown">
+          <li class="sidebar-item">
             <a class="sidebar-link dropdown-toggle" data-bs-toggle="dropdown" href="#" aria-expanded="false"><i
                 class="align-middle" data-feather="list"></i> <span class="align-middle">Reports</span></a>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="<%= gridsquares_reports_path %>">Gridsquares</a></li>
+              <li><a class="dropdown-item" href="<%= prefixes_reports_path %>">Prefixes</a></li>
               <li><a class="dropdown-item" href="<%= us_states_reports_path %>">US States</a></li>
             </ul>
           </li>

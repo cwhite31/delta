@@ -1,13 +1,21 @@
 <div id="<%= dom_id contact %>">
     <tr>
-        <td>
-            <%= contact.qso_date.strftime("%d" " %b" " %y" ) %>
-        </td>
-        <td>
-            <%= contact.time_on[0..1] %>:<%= contact.time_on[2..3] %>
-        </td>
         <td class="d-none d-xl-table-cell">
             <%= link_to contact.callsign, contact_path(contact) %>
+        </td>
+        <td class="d-none d-xl-table-cell">
+            <%= contact.qso_date.strftime("%d" " %b" " %y" ) %> :
+                <%= contact.time_on[0..1] %>:<%= contact.time_on[2..3] %>
+        </td>
+
+        <td class="d-none d-xl-table-cell">
+            <%= contact.country %>
+        </td>
+        <td class="d-none d-xl-table-cell">
+            <%= contact.state %>
+        </td>
+        <td class="d-none d-xl-table-cell">
+            <%= contact.gridsquare %>
         </td>
         <td class="d-none d-xl-table-cell">
             <%= contact.band %>

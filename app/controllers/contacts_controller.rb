@@ -88,15 +88,14 @@ class ContactsController < ApplicationController
         # ap records
         records.each do |record|
           contact = Contact.new
-      contact.callsign = record.to_h["Call:"]
-      puts record.to_h["."]
-      contact.qso_date = record.to_h["QSO_Date:"]
-      if record.to_h["Time_On:"]
-        contact.time_on = record.to_h["Time_On:"]
-        contact.started_at = record.to_h["QSO_Date:"] + " " + record.to_h["Time_On:"][0..1] + ":" + record.to_h["Time_On:"][2..3]+ ":" + record.to_h["Time_On:"][4..5]
-      else
-        contact.started_at = record.to_h["QSO_Date:"]
-      end
+          contact.callsign = record.to_h["Call:"]
+          contact.qso_date = record.to_h["QSO_Date:"]
+          if record.to_h["Time_On:"]
+            contact.time_on = record.to_h["Time_On:"]
+            contact.started_at = record.to_h["QSO_Date:"] + " " + record.to_h["Time_On:"][0..1] + ":" + record.to_h["Time_On:"][2..3]+ ":" + record.to_h["Time_On:"][4..5]
+          else
+            contact.started_at = record.to_h["QSO_Date:"]
+          end
       
       if record.to_h["Time_Off:"]
         contact.time_off = record.to_h["Time_Off:"]
@@ -118,7 +117,7 @@ class ContactsController < ApplicationController
       contact.station_gridsquare = record.to_h["My_Gridsquare:"]
       contact.mode = record.to_h["Mode:"]
       contact.operator_name = record.to_h["Operator:"]
-      contact.prefix = record.to_h["Prefix:"]
+      contact.prefix = record.to_h["Pfx:"]
       contact.signal_report_received = record.to_h["RST_Rcvd:"]
       contact.signal_report_sent = record.to_h["RST_Sent:"]
       if record.to_h["QSL_Rcvd:"] == "Y"
