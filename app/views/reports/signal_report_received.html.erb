@@ -1,0 +1,76 @@
+<div class="row">
+  <div class="col-12 col-lg-8 col-xxl-9 d-flex">
+    <div class="card flex-fill">
+      <div class="card-header">
+
+        <h5 class="card-title mb-0">Average Signal Report Received</h5>
+      </div>
+      <table class="table table-hover my-0">
+        <thead>
+          <tr>
+            <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">Country</th>
+            <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">40m</th>
+            <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">30m</th>
+            <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">20m</th>
+            <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">17m</th>
+            <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">15m</th>
+            <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">12m</th>
+            <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">10m</th>
+            <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white"  align="right">TOTAL</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% index=0 %>
+            <% @prefixes.each do |prefix| %>
+              <% index +=1 %>
+                <tr>
+                  <td class="d-none d-xl-table-cell">
+                    <%= prefix['country'] %>
+                  </td>
+                  <td class="d-none d-xl-table-cell">
+                    <%= prefix['40m'] %>
+                  </td>
+                  <td class="d-none d-xl-table-cell">
+                    <%= prefix['30m'] %>
+                  </td>
+                  <td class="d-none d-xl-table-cell">
+                    <%= prefix['20m'] %>
+                  </td>
+                  <td class="d-none d-xl-table-cell">
+                    <%= prefix['17m'] %>
+                  </td>
+                  <td class="d-none d-xl-table-cell">
+                    <%= prefix['15m'] %>
+                  </td>
+                  <td class="d-none d-xl-table-cell">
+                    <%= prefix['12m'] %>
+                  </td>
+                  <td class="d-none d-xl-table-cell">
+                    <%= prefix['10m'] %>
+                  </td>
+                  <td class="d-none d-xl-table-cell" align="right">
+                    <%= Contact.select('CAST(AVG(signal_report_received) AS int)').where(country: prefix['country']
+                      ).group(:id, :country).first.avg %>
+                  </td>
+                </tr>
+                <% if [10, 20, 30,40,50,60,60,80,90,100].include?(index) %>
+                  <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">Country</th>
+                  <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">40m</th>
+                  <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">30m</th>
+                  <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">20m</th>
+                  <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">17m</th>
+                  <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">15m</th>
+                  <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">12m</th>
+                  <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">10m</th>
+                  <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white" align="right">TOTAL</th>
+                  <% end %>
+                    <% end %>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+</row>
+</div>

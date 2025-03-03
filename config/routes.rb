@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       get "us_states"
       get "gridsquares"
       get "prefixes"
+      get "signal_report_received"
     end
   end
 

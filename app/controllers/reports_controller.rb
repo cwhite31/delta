@@ -15,6 +15,13 @@ class ReportsController < ApplicationController
     @prefixes = ActiveRecord::Base.connection.execute(sql)
   end
 
+  def signal_report_received
+    sql_source = "'select max(cty.id), country, band, CAST(AVG(signal_report_received) AS int) from contacts c join countries cty on cty.dxcc_id = c.dxcc_id group by country, band order by 2,3 desc'"
+    sql_cat = "'select distinct band from contacts dxcc order by 1'"
+    sql = "select * from crosstab(" + sql_source + ", " + sql_cat + ') AS ct(id int, country text, "10m" int, "12m" int, "15m" int, "17m" int, "20m" int, "40m" int, "6m" int);'
+    @prefixes = ActiveRecord::Base.connection.execute(sql)
+  end
+
   def us_states
     sql_source = "'select state, band, count(band) from contacts c where c.state IS NOT NULL group by band, state order by 1,2 desc'"
     sql_cat = "'select distinct band from contacts where state IS NOT NULL order by 1 desc'"
