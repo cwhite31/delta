@@ -27,6 +27,15 @@ class ReportsController < ApplicationController
     sql_cat = "'select distinct band from contacts where state IS NOT NULL order by 1 desc'"
     sql = "select * from crosstab(" + sql_source + ", " + sql_cat + ') AS ct(state text, "40m" int, "20m" int, "17m" int, "15m" int, "12m" int, "10m" int);'
     @us_states = ActiveRecord::Base.connection.execute(sql)
-    puts @us_states
+    
+    @current = Contact.distinct.pluck(:state)
+    @state_array =%w(AK AL AR AZ CA CO CT DC DE FL GA HI IA ID IL IN KS KY LA MA MD ME MI MN MO MS MT NC ND NE NH NJ NM NV NY OH OK OR PA RI SC SD TN TX UT VA VT WA WI WV WY)
+    @current.each do |st|
+      unless st == nil
+        if @state_array.include? st
+         @state_array.delete(st)
+        end
+      end
+    end
   end
 end

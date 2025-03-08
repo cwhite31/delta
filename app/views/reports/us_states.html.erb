@@ -20,7 +20,7 @@
           </tr>
           <tr>
             <td class="d-none d-xl-table-cell">
-              
+
             </td>
             <td class="d-none d-xl-table-cell">
               <%= Contact.select(:state).distinct.where(band: '40M' ).count %>
@@ -99,8 +99,21 @@
       </table>
     </div>
   </div>
-
-</div>
-</row>
+  <div class="col-12 col-lg-4 col-xxl-3 d-flex">
+    <div class="card flex-fill w-100">
+      <div class="card-header">
+        <h5 class="card-title mb-0">Outstanding States</h5>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <h5><% @state_array.each do |x| %>
+            <%= x %>
+          <% end %></h5>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  </row>
 </div>
 <%= link_to "New contact" , new_contact_path %>
