@@ -5,7 +5,7 @@
 
         <h5 class="card-title mb-0">Unique Gridsquares</h5>
       </div>
-      <table class="table table-hover my-0">
+      <table class="table table-sm table-hover my-0">
         <thead>
           <tr>
             <th class="d-none d-xl-table-cell bg-secondary bg-gradient text-white">Country</th>
@@ -20,7 +20,7 @@
           </tr>
           <tr>
             <td class="d-none d-xl-table-cell">
-              
+
             </td>
             <td class="d-none d-xl-table-cell">
               <%= Contact.select(:gridsquare).distinct.where(band: '40M' ).count %>
@@ -78,8 +78,8 @@
                     <%= grid['10m'] %>
                   </td>
                   <td class="d-none d-xl-table-cell">
-                    <%= grid['10m'].to_i + grid['12m'].to_i + grid['15m'].to_i + grid['20m'].to_i +
-                      grid['30m'].to_i + grid['40m'].to_i %>
+                    <%= grid['10m'].to_i + grid['12m'].to_i + grid['15m'].to_i + grid['20m'].to_i + grid['30m'].to_i +
+                      grid['40m'].to_i %>
                   </td>
                 </tr>
                 <% if [10, 20, 30,40,50,60,60,80,90,100].include?(index) %>
