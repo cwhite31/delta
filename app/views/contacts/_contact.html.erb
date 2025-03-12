@@ -4,18 +4,11 @@
             <%= link_to contact.callsign, contact_path(contact) %>
         </td>
         <td class="d-none d-xl-table-cell">
-            <%= contact.qso_date.strftime("%d" " %b" " %y" ) %> :
-                <%= contact.time_on[0..1] %>:<%= contact.time_on[2..3] %>
+            <%= contact.qso_date.strftime("%d" " %b" " %y" ) %>
         </td>
 
         <td class="d-none d-xl-table-cell">
             <%= contact.country %>
-        </td>
-        <td class="d-none d-xl-table-cell">
-            <%= contact.state %>
-        </td>
-        <td class="d-none d-xl-table-cell">
-            <%= contact.gridsquare %>
         </td>
         <td class="d-none d-xl-table-cell">
             <%= contact.band %>
@@ -23,13 +16,13 @@
         <td><span class="badge bg-success">
                 <%= contact.mode %>
             </span></td>
-        <td class="d-none d-xl-table-cell">
+        <td class="d-none d-xl-table-cell text-end">
             <%=contact.signal_report_sent %>
         </td>
-        <td class="d-none d-xl-table-cell">
+        <td class="d-none d-xl-table-cell text-end">
             <%=contact.signal_report_received %>
         </td>
-        <td class="d-none d-md-table-cell">
+        <td class="d-none d-md-table-cell text-end">
             <% if contact.qsl_received %>
                 <i data-feather="check" class="text-success"></i>
                 <% else %>
