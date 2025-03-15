@@ -300,19 +300,18 @@
   document.addEventListener("DOMContentLoaded", function () {
     var ctx = document.getElementById("chartjs-monthly-contacts").getContext("2d");
     var gradient = ctx.createLinearGradient(0, 0, 0, 225);
-    gradient.addColorStop(0, "rgba(215, 227, 244, 1)");
-    gradient.addColorStop(1, "rgba(215, 227, 244, 0)");
     // Line chart
     new Chart(document.getElementById("chartjs-monthly-contacts"), {
-      type: "line",
+      type: "bar",
       data: {
         labels: <%= @monthly.keys.to_json.html_safe %>,
-        datasets: [{
-          label: "Contacts",
-          fill: true,
-          backgroundColor: gradient,
-          borderColor: window.theme.primary,
-          data:  <%= @monthly.values.to_json.html_safe %>,
+      datasets: [{
+        label: "Contacts",
+        backgroundColor: window.theme.primary,
+        borderColor: window.theme.primary,
+        hoverBackgroundColor: window.theme.primary,
+        hoverBorderColor: window.theme.primary,
+        data:  <%= @monthly.values.to_json.html_safe %>,
           }]
       },
     options: {
@@ -341,12 +340,11 @@
       yAxes: [{
         ticks: {
           stepSize: 50,
-          max: 300
         },
         display: true,
         borderDash: [3, 3],
         gridLines: {
-          color: "rgba(0,0,0,0.0)"
+          color: "rgba(0,0,0,0.05)"
         }
       }]
     }
@@ -380,7 +378,7 @@
     scales: {
       yAxes: [{
         gridLines: {
-          display: false
+          color: "rgba(0,0,0,0.05)"
         },
         stacked: false,
         ticks: {
