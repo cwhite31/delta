@@ -13,13 +13,13 @@
         <div class="card-body text-left">
           <div class="card-body">
             <ul class="list-unstyled mb-0">
-              <li class="mb-1"><span data-feather="home" class="feather-sm me-1"></span>
+              <li class="mb-1">Continent:
                 <%= @country.continent_code %>
               </li>
-              <li class="mb-1"><span data-feather="map" class="feather-sm me-1"></span>
+              <li class="mb-1">CQ Zone:
                 <%= @country.cq_zone %>
               </li>
-              <li class="mb-1"><span data-feather="grid" class="feather-sm me-1"></span>
+              <li class="mb-1">ITU Zone:
                 <%= @country.itu_zone %>
               </li>
             </ul>
@@ -74,7 +74,7 @@
           <h5 class="card-title mb-0">Contacts</h5>
         </div>
         <div class="card-body h-100">
-          <table class="table table-hover my-0">
+          <table class="table table-hover my-0 font-monospace">
             <thead>
               <tr>
                 <th class="d-none d-xl-table-cell">Callsign</th>
@@ -94,7 +94,11 @@
                         <%= link_to contact.callsign, contact_path(contact) %>
                     </td>
                     <td>
-                        <%= contact.qso_date %> <%= contact.time_on[0..1] %>:<%= contact.time_on[2..3] %>
+                      <% if Date.current.year==contact.qso_date.year %>
+                      <%= contact.qso_date.strftime("%d" " %b" ) %>
+                          <% else %>
+                              <%= contact.qso_date.strftime("%d" " %b" " %y" ) %>
+                                  <% end %>
                     </td>
                     <td class="d-none d-xl-table-cell">
                         <%= contact.band %>
