@@ -4,9 +4,12 @@
             <%= link_to contact.callsign, contact_path(contact) %>
         </td>
         <td class="d-none d-xl-table-cell">
-            <%= contact.qso_date.strftime("%d" " %b" " %y" ) %>
+            <% if Date.current.year==contact.qso_date.year %>
+                <%= contact.qso_date.strftime("%d" " %b" ) %>
+                    <% else %>
+                        <%= contact.qso_date.strftime("%d" " %b" " %y" ) %>
+                            <% end %>
         </td>
-
         <td class="d-none d-xl-table-cell">
             <%= contact.country %>
         </td>
