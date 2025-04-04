@@ -8,8 +8,8 @@
   <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-      <%= stylesheet_link_tag "application" , "data-turbo-track": "reload" %>
-        <%= javascript_include_tag "application" , "data-turbo-track": "reload" , defer: true %>
+      <%= stylesheet_link_tag "application" , "data-turbo-track" => "reload" %>
+        <%= javascript_include_tag "application" , "data-turbo-track" => "reload" , defer: true %>
 
           <link rel="preconnect" href="https://fonts.gstatic.com">
           <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
@@ -46,7 +46,8 @@
             <ul class="dropdown-menu dropdown-menu-end">
               <li><a class="dropdown-item" href="<%= gridsquares_reports_path %>">Gridsquares</a></li>
               <li><a class="dropdown-item" href="<%= prefixes_reports_path %>">Prefixes</a></li>
-              <li><a class="dropdown-item" href="<%= signal_report_received_reports_path %>">Average Signal Report</a></li>
+              <li><a class="dropdown-item" href="<%= signal_report_received_reports_path %>">Average Signal Report</a>
+              </li>
               <li><a class="dropdown-item" href="<%= us_states_reports_path %>">US States</a></li>
             </ul>
           </li>

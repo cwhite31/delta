@@ -19,5 +19,37 @@ class WelcomeController < ApplicationController
   #add 17m
  sql = "select * from crosstab(" + sql_source + ", " + sql_cat + ') AS ct(id int, country text, "10m" int, "12m" int, "15m" int, "17m" int, "20m" int, "40m" int, "6m" int);'
   @slots = ActiveRecord::Base.connection.execute(sql)
+
+
+
+  sql = <<SQL
+    SELECT yrm
+    , SUM(SUM(flag))
+    OVER (ORDER BY yrm
+    ROWS UNBOUNDED PRECEDING) AS cumulative_new_countries
+    FROM
+    (
+    SELECT
+    country
+    , to_char(qso_date, 'YYYY-MM') AS yrm
+    , CASE -- find the first year when a customer placed an order
+    WHEN to_char(qso_date, 'YYYY-MM')
+    = MIN(to_char(qso_date, 'YYYY-MM'))
+    OVER (PARTITION BY country)
+    THEN 1
+    ELSE 0
+    END AS flag
+    FROM contacts
+    GROUP BY yrm, country
+    ) AS dt
+    GROUP BY 1
+SQL
+@culmulative_dxcc = Contact.find_by_sql [sql]
+
+@yrm = @culmulative_dxcc.map(&:yrm).to_json
+
+puts @yrm
+
   end
+
 end

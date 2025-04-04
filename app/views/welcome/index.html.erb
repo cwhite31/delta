@@ -156,7 +156,6 @@
   <div class="col-xl-6 col-xxl-7">
     <div class="card flex-fill w-100">
       <div class="card-header">
-
         <h5 class="card-title mb-0">Monthly Contacts | <%= Time.now.year %>
         </h5>
       </div>
@@ -166,6 +165,18 @@
         </div>
       </div>
     </div>
+    <div class="card flex-fill w-100">
+  <div class="card-header">
+
+    <h5 class="card-title mb-0">Culmulative DXCC
+    </h5>
+  </div>
+  <div class="card-body py-3">
+    <div class="chart chart-sm">
+      <canvas id="chartjs-dxcc"></canvas>
+    </div>
+  </div>
+</div>
   </div>
 </div>
 
@@ -294,6 +305,7 @@
 </div>
 </main>
 </div>
+
 </div>
 
 <script>
@@ -352,6 +364,69 @@
     });
   });
 </script>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var ctx = document.getElementById("chartjs-dxcc").getContext("2d");
+    var gradient = ctx.createLinearGradient(0, 0, 0, 225);
+    // Line chart
+    new Chart(document.getElementById("chartjs-dxcc"), {
+      type: "bar",
+      data: {
+        labels: <%= raw @culmulative_dxcc.map(&:yrm)%>,
+      datasets: [{
+        label: "DXCC",
+        backgroundColor: window.theme.primary,
+        borderColor: window.theme.primary,
+        hoverBackgroundColor: window.theme.primary,
+        hoverBorderColor: window.theme.primary,
+        data:  <%= @culmulative_dxcc.map(&:cumulative_new_countries) %>,
+          }]
+      },
+    options: {
+    maintainAspectRatio: false,
+    legend: {
+      display: false
+    },
+    tooltips: {
+      intersect: false
+    },
+    hover: {
+      intersect: true
+    },
+    plugins: {
+      filler: {
+        propagate: false
+      }
+    },
+    scales: {
+      xAxes: [{
+        reverse: true,
+        ticks: {
+      maxTicksLimit: 11
+    },
+        gridLines: {
+          color: "rgba(0,0,0,0.0)"
+        }
+      }],
+      yAxes: [{
+        ticks: {
+          stepSize: 50,
+        },
+        display: true,
+        borderDash: [3, 3],
+        gridLines: {
+          color: "rgba(0,0,0,0.05)"
+        }
+      }]
+    }
+  }
+    });
+  });
+</script>
+
+
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     // Bar chart
