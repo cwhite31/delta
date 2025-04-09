@@ -1,7 +1,7 @@
 <div class="container-fluid p-0 mt-0">
   <div class="mb-3">
     <h1 class="h2 d-inline align-middle">
-      <%= @country.name %>
+      <%= @country.name %> (<%= @country.dxcc_id %>)
     </h1>
   </div>
   <div class="row">
@@ -88,44 +88,49 @@
             </thead>
             <tbody>
               <% @contacts.each do |contact| %>
-              <div id="<%= dom_id contact %>">
-                <tr>
+                <div id="<%= dom_id contact %>">
+                  <tr>
                     <td class="d-none d-xl-table-cell">
-                        <%= link_to contact.callsign, contact_path(contact) %>
+                      <%= link_to contact.callsign, contact_path(contact) %>
                     </td>
                     <td>
                       <% if Date.current.year==contact.qso_date.year %>
-                      <%= contact.qso_date.strftime("%d" " %b" ) %>
+                        <%= contact.qso_date.strftime("%d" " %b" ) %>
                           <% else %>
-                              <%= contact.qso_date.strftime("%d" " %b" " %y" ) %>
-                                  <% end %>
+                            <%= contact.qso_date.strftime("%d" " %b" " %y" ) %>
+                              <% end %>
                     </td>
                     <td class="d-none d-xl-table-cell">
-                        <%= contact.band %>
+                      <%= contact.band %>
                     </td>
                     <td><span class="badge bg-success">
-                            <%= contact.mode %>
-                        </span></td>
+                        <%= contact.mode %>
+                      </span></td>
                     <td class="d-none d-xl-table-cell">
-                        <%=contact.signal_report_sent %>
+                      <%=contact.signal_report_sent %>
                     </td>
                     <td class="d-none d-xl-table-cell">
-                        <%=contact.signal_report_received %>
+                      <%=contact.signal_report_received %>
                     </td>
                     <td class="d-none d-md-table-cell">
-                        <% if contact.qsl_received %>
-                            <i data-feather="check" class="text-success"></i>
-                            <% else %>
-                                <i data-feather="x-circle" class="text-secondary"></i>
-                                <% end %>
+                      <% if contact.qsl_received %>
+                        <i data-feather="check" class="text-success"></i>
+                        <% else %>
+                          <i data-feather="x-circle" class="text-secondary"></i>
+                          <% end %>
                     </td>
-                </tr>
-            </div>
-                  <% end %>
+                  </tr>
+                </div>
+                <% end %>
             </tbody>
           </table>
         </div>
-
+        <div class="px-3 mt-2">
+          <div class="mb-3">
+            <p><%= page_entries_info @contacts, model: 'Contacts' %></p>
+          </div>
+          <%= will_paginate @contacts, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+        </div>
       </div>
 
       <hr />

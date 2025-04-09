@@ -13,7 +13,7 @@ class WelcomeController < ApplicationController
   @prefixes_this_year = Contact.select(:prefix).this_year.distinct.count
 
 
-  sql_source = "'select max(cty.dxcc_id), country, band, count(band) from contacts c join countries cty on cty.name = c.country group by country, band order by 2,3 desc'"
+  sql_source = "'select max(cty.dxcc_id), country, band, count(band) from contacts c join countries cty on cty.dxcc_id = c.dxcc_id group by country, band order by 2,3 desc'"
   sql_cat = "'select distinct band from contacts dxcc order by 1'"
   # sql = "select * from crosstab(" + sql_source + ", " + sql_cat + ') AS ct(country text, "10m" int, "12m" int, "15m" int, "20m" int, "40m" int, "6m" int);'
   #add 17m
@@ -47,8 +47,6 @@ SQL
 @culmulative_dxcc = Contact.find_by_sql [sql]
 
 @yrm = @culmulative_dxcc.map(&:yrm).to_json
-
-puts @yrm
 
   end
 

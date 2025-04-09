@@ -11,7 +11,7 @@
             <tr>
               <th class="d-none d-xl-table-cell">Callsign</th>
               <th class="d-none d-xl-table-cell">Date</th>
-              <th class="d-none d-xl-table-cell" >Country</th>
+              <th class="d-none d-xl-table-cell">Country</th>
               <th class="d-none d-xl-table-cell">Band</th>
               <th class="d-none d-xl-table-cell">Mode</th>
               <th class="d-none d-xl-table-cell text-end">Sent</th>
@@ -23,15 +23,17 @@
             <% @contacts.each do |contact| %>
               <%= render contact %>
                 <% end %>
-                  <tr>
-                    <td colspan="5">
-                      <%= will_paginate @posts %>
-                    </td>
-                  </tr>
-
           </tbody>
 
         </table>
+        <div class="px-3 mt-2">
+          <div class="mb-3">
+            <p>
+              <%= page_entries_info @contacts, model: 'Contacts' %>
+            </p>
+          </div>
+          <%= will_paginate @contacts, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+        </div>
       </div>
 
     </div>

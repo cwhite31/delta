@@ -6,9 +6,9 @@ class ContactsController < ApplicationController
   def index
     if params.has_key?(:callsign)
     @contacts = Contact
-    .where('callsign LIKE ?', params[:callsign].upcase + '%').paginate(page: params[:page]).order(qso_date: :desc)
+    .where('callsign LIKE ?', params[:callsign].upcase + '%').paginate(page: params[:page], per_page: 15).order(qso_date: :desc)
     else
-      @contacts = Contact.paginate(page: params[:page]).order(qso_date: :desc)
+      @contacts = Contact.paginate(page: params[:page], per_page: 20).order(qso_date: :desc)
     end
   end
 
