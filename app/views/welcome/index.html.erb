@@ -8,7 +8,7 @@
             <div class="card-body">
               <div class="row">
                 <div class="col mt-0">
-                  <h5 class="card-title">Last</h5>
+                  <h5 class="card-title">DXCC</h5>
                 </div>
 
                 <div class="col-auto">
@@ -18,64 +18,16 @@
                 </div>
               </div>
               <h1 class="mt-1 mb-3">
-                <%= @last.callsign %>
+                <%= Country.where(worked: true).count %>
               </h1>
               <div class="mb-0">
                 <span class="text-primary"> <i class="mdi mdi-arrow-bottom-right"></i>
-                  <%= @last.qso_date.strftime("%d %B %y") %> | <%= @last.band %>
-                </span>
-                <span class="text-muted"></span>
-              </div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-body">
-              <div class="row">
-                <div class="col mt-0">
-                  <h5 class="card-title">Unique</h5>
-                </div>
-                <div class="col-auto">
-                  <div class="stat text-primary">
-                    <i class="align-middle" data-feather="radio"></i>
-                  </div>
-                </div>
-              </div>
-              <h1 class="mt-1 mb-3">
-                <%= Contact.distinct.count(:callsign) %>
-              </h1>
-              <div class="mb-0">
-                <span class="text-primary"> <i class="mdi mdi-arrow-bottom-right"></i>
-                  <%= Contact.this_year.distinct.count(:callsign) %>
+                  <%= Contact.this_year.distinct.count(:dxcc_id) %>
                 </span>
                 <span class="text-muted">This year</span>
               </div>
             </div>
           </div>
-          <div class="card">
-            <div class="card-body">
-              <div class="row">
-                <div class="col mt-0">
-                  <h5 class="card-title">Grids</h5>
-                </div>
-                <div class="col-auto">
-                  <div class="stat text-primary">
-                    <i class="align-middle" data-feather="radio"></i>
-                  </div>
-                </div>
-              </div>
-              <h1 class="mt-1 mb-3">
-                <%= @gridsquares %>
-              </h1>
-              <div class="mb-0">
-                <span class="text-primary"> <i class="mdi mdi-arrow-bottom-right"></i>
-                  <%= @gridsquares_this_year %>
-                </span>
-                <span class="text-muted">This year</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-6">
           <div class="card">
             <div class="card-body">
               <div class="row">
@@ -104,7 +56,31 @@
             <div class="card-body">
               <div class="row">
                 <div class="col mt-0">
-                  <h5 class="card-title">DXCC</h5>
+                  <h5 class="card-title">Grids</h5>
+                </div>
+                <div class="col-auto">
+                  <div class="stat text-primary">
+                    <i class="align-middle" data-feather="radio"></i>
+                  </div>
+                </div>
+              </div>
+              <h1 class="mt-1 mb-3">
+                <%= @gridsquares %>
+              </h1>
+              <div class="mb-0">
+                <span class="text-primary"> <i class="mdi mdi-arrow-bottom-right"></i>
+                  <%= @gridsquares_this_year %>
+                </span>
+                <span class="text-muted">This year</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="card">
+            <div class="card-body">
+              <div class="row">
+                <div class="col mt-0">
+                  <h5 class="card-title">Last</h5>
                 </div>
 
                 <div class="col-auto">
@@ -114,11 +90,59 @@
                 </div>
               </div>
               <h1 class="mt-1 mb-3">
-                <%= Country.where(worked: true).count %>
+                <%= @last.callsign %>
               </h1>
               <div class="mb-0">
                 <span class="text-primary"> <i class="mdi mdi-arrow-bottom-right"></i>
-                  <%= Contact.this_year.distinct.count(:dxcc_id) %>
+                  <%= @last.qso_date.strftime("%d %B %y") %> | <%= @last.band %>
+                </span>
+                <span class="text-muted"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="card">
+            <div class="card-body">
+              <div class="row">
+                <div class="col mt-0">
+                  <h5 class="card-title">Slots</h5>
+                </div>
+                <div class="col-auto">
+                  <div class="stat text-primary">
+                    <i class="align-middle" data-feather="radio"></i>
+                  </div>
+                </div>
+              </div>
+              <h1 class="mt-1 mb-3">
+                <%= @slot_total %>
+              </h1>
+              <div class="mb-0">
+                <span class="text-primary"> <i class="mdi mdi-arrow-bottom-right"></i>
+                  <%= @slot_total_this_year %>
+                </span>
+                <span class="text-muted">This year</span>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <div class="row">
+                <div class="col mt-0">
+                  <h5 class="card-title">Unique</h5>
+                </div>
+                <div class="col-auto">
+                  <div class="stat text-primary">
+                    <i class="align-middle" data-feather="radio"></i>
+                  </div>
+                </div>
+              </div>
+              <h1 class="mt-1 mb-3">
+                <%= Contact.distinct.count(:callsign) %>
+              </h1>
+              <div class="mb-0">
+                <span class="text-primary"> <i class="mdi mdi-arrow-bottom-right"></i>
+                  <%= Contact.this_year.distinct.count(:callsign) %>
                 </span>
                 <span class="text-muted">This year</span>
               </div>
