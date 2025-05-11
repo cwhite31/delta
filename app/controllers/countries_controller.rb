@@ -3,8 +3,8 @@ class CountriesController < ApplicationController
   before_action :set_country, only: %i[ show edit update destroy ]
   def index
     @countries = Country.all.order(:name)
-    @slots = Contact.select('distinct dxcc_id, band')
-    @slots_confirmed = Contact.select('distinct dxcc_id, band').where('qsl_received = ?', true)
+    @slots = Contact.select('distinct dxcc_id, band').where("country is not null")
+    @slots_confirmed = Contact.select('distinct dxcc_id, band').where('qsl_received = ?', true).where("country is not null")
     
   end
 

@@ -41,6 +41,7 @@ class WelcomeController < ApplicationController
       ELSE 0
       END AS flag
       FROM contacts
+      WHERE country IS NOT NULL
       GROUP BY yrm, country
       ) AS dt
       GROUP BY 1
